@@ -3,6 +3,7 @@
 
 ## Integrantes
 | Luciano Sepulveda Valdes | luci.sepulveda@duocuc.cl |
+| Sergio Peralta | serg.peralta@duocuc.cl |
 
 ## Caso
 Ferretería Los Maestros.
