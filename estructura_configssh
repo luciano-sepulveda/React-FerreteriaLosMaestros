@@ -1,4 +1,0 @@
-Host Ec2
-    HostName 54.164.202.233
-    User ubuntu
-    IdentityFile "C:\Users\Notebook\.ssh\006.pem"
