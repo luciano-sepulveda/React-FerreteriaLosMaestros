@@ -1,7 +1,129 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import TarjetaProducto from '../components/molecules/TarjetaProducto';
+import { listarProductos } from '../services/productoService';
+import { CATEGORIAS } from '../data/productos';
+import useTituloPagina from '../hooks/useTituloPagina';
+
 
 const Inicio = () => {
-  return <h2 className="p-5">Inicio</h2>;
+  useTituloPagina('Inicio');
+  const navegar = useNavigate();
+  const [productosDestacados, setProductosDestacados] = useState([]);
+
+  useEffect(() => {
+    const todosLosProductos = listarProductos();
+    // 3 productos destacados para la vitrina inicial
+    setProductosDestacados(todosLosProductos.slice(0, 3));
+  }, []);
+
+  return (
+    <div>
+      {/* Hero Banner Responsivo */}
+      <section className="bg-dark text-white py-5 shadow-sm border-bottom border-warning border-3">
+        <Container>
+          <Row className="align-items-center py-4">
+            <Col lg={8} className="text-center text-lg-start mb-4 mb-lg-0">
+              <span className="badge bg-warning text-dark fw-bold px-3 py-2 mb-3 text-uppercase">
+                22 Años en La Serena · Calidad y Confianza
+              </span>
+              <h1 className="display-4 fw-extrabold mb-3">
+                Ferretería <span className="text-warning">Los Maestros</span>
+              </h1>
+              <p className="lead text-light opacity-75 mb-4">
+                El stock más completo en materiales de construcción, herramientas de alta gama y ferretería general.
+                Atención especializada para particulares y contratistas con despacho a obra y retiro en tienda.
+              </p>
+              <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                <Button
+                  variant="warning"
+                  size="lg"
+                  className="fw-bold px-4 shadow-sm"
+                  onClick={() => navegar('/catalogo')}
+                >
+                  Explorar Catálogo Completo
+                </Button>
+                <Button
+                  variant="outline-light"
+                  size="lg"
+                  className="px-4"
+                  onClick={() => navegar('/login')}
+                >
+                  Portal Contratistas (Login)
+                </Button>
+              </div>
+            </Col>
+            <Col lg={4} className="text-center">
+              <Card className="bg-secondary bg-opacity-25 border-warning text-white p-4 rounded-4 shadow">
+                <div className="fs-1 mb-2">🏗️</div>
+                <h4 className="fw-bold text-warning">Beneficios Contratistas</h4>
+                <ul className="list-unstyled text-start small mt-3 mb-0">
+                  <li className="mb-2">✓ Cuenta corriente y pago a 30 días</li>
+                  <li className="mb-2">✓ Despacho directo a faenas y obras</li>
+                  <li className="mb-2">✓ Alertas de stock en tiempo real</li>
+                  <li>✓ Cotizaciones instantáneas sin esperas</li>
+                </ul>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      {/* Sección 9 Categorías*/}
+      <section className="py-5 bg-white">
+        <Container>
+          <div className="text-center mb-5">
+            <h2 className="fw-bold text-dark">Nuestras 9 Categorías de Especialidad</h2>
+            <p className="text-muted">Encuentra todo lo que necesitas para tu proyecto o faena</p>
+          </div>
+
+          <Row className="g-3 justify-content-center">
+            {CATEGORIAS.map((categoriaItem, indice) => (
+              <Col key={categoriaItem} xs={6} sm={4} md={4} lg={3} xl={2}>
+                <Card
+                  className="text-center p-3 h-100 border shadow-sm rounded-3 cursor-pointer bg-light"
+                  style={{ cursor: 'pointer', transition: 'all 0.2s ease-in-out' }}
+                  onClick={() => navegar(`/categoria/${encodeURIComponent(categoriaItem)}`)}
+                >
+                  <div className="fs-2 mb-2">
+                    {indice === 0 ? '🧱' : indice === 1 ? '🎨' : indice === 2 ? '🔨' : indice === 3 ? '🚰' : indice === 4 ? '⚡' : indice === 5 ? '🔩' : indice === 6 ? '🪵' : indice === 7 ? '🦺' : '🌱'}
+                  </div>
+                  <span className="fw-semibold small text-dark d-block">{categoriaItem}</span>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Productos Destacados */}
+      <section className="py-5 bg-light border-top">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h2 className="fw-bold text-dark mb-1">Productos Destacados en Bodega</h2>
+              <p className="text-muted small mb-0">Disponibilidad inmediata para retiro en sucursal</p>
+            </div>
+            <Button variant="outline-dark" size="sm" onClick={() => navegar('/catalogo')}>
+              Ver todos ({listarProductos().length}) →
+            </Button>
+          </div>
+
+          <Row className="g-4">
+            {productosDestacados.map((productoItem) => (
+              <Col key={productoItem.id} xs={12} sm={6} lg={4}>
+                <TarjetaProducto
+                  producto={productoItem}
+                  alCotizar={() => navegar('/catalogo')}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+    </div>
+  );
 };
 
 export default Inicio;
