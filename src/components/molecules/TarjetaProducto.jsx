@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import Precio from '../atoms/Precio';
 import Stock from '../atoms/Stock';
 import Boton from '../atoms/Boton';
+import Etiqueta from '../atoms/Etiqueta';
+import ControlCantidad from './ControlCantidad';
 
+const TarjetaProducto = ({
+  producto,
+  alCotizar,
+  onCotizar,
+  alAgregarAlCarrito,
+  alComprar,
+  alVerDetalle,
+  onVerDetalle
+}) => {
+  const [cantidad, setCantidad] = useState(1);
+  const [agregadoReciente, setAgregadoReciente] = useState(false);
 
-const TarjetaProducto = ({ producto, alCotizar, onCotizar, alVerDetalle, onVerDetalle }) => {
   const {
     codigo,
     nombre,
@@ -18,14 +30,26 @@ const TarjetaProducto = ({ producto, alCotizar, onCotizar, alVerDetalle, onVerDe
     descripcion
   } = producto;
 
+  const sinStock = stock <= 0;
   const manejadorCotizar = alCotizar || onCotizar;
   const manejadorVerDetalle = alVerDetalle || onVerDetalle;
+  const manejadorAgregar = alAgregarAlCarrito || alComprar;
+
+  const manejarAgregarCarrito = () => {
+    if (manejadorAgregar && !sinStock) {
+      manejadorAgregar(producto, cantidad);
+      setAgregadoReciente(true);
+      setTimeout(() => setAgregadoReciente(false), 1800);
+    }
+  };
 
   return (
     <Card className="h-100 shadow-sm border-0 rounded-3 d-flex flex-column">
       <Card.Body className="d-flex flex-column p-3">
         <div className="d-flex justify-content-between align-items-start mb-2">
-          <span className="badge bg-light text-secondary border small">{codigo}</span>
+          <Etiqueta variante="light" claseAdicional="text-secondary border small">
+            {codigo}
+          </Etiqueta>
           <Stock stock={stock} stockMinimo={stockMinimo} />
         </div>
 
@@ -43,19 +67,48 @@ const TarjetaProducto = ({ producto, alCotizar, onCotizar, alVerDetalle, onVerDe
           <Precio valor={precioVenta} />
         </div>
 
-        <div className="d-flex gap-2 mt-2">
-          <Boton
-            texto="Cotizar"
-            variante="warning"
-            alHacerClic={() => manejadorCotizar && manejadorCotizar(producto)}
-          />
-          {manejadorVerDetalle && (
-            <Boton
-              texto="Ver"
-              variante="outline-secondary"
-              alHacerClic={() => manejadorVerDetalle(producto)}
+        {/* Control de cantidad para agregar/comprar */}
+        {!sinStock && (
+          <div className="d-flex justify-content-between align-items-center mb-2">
+            <span className="text-muted small">Cantidad:</span>
+            <ControlCantidad
+              cantidad={cantidad}
+              stockMaximo={stock}
+              alCambiar={setCantidad}
+              tamano="sm"
             />
-          )}
+          </div>
+        )}
+
+        {/* Acciones principales: Comprar/Agregar y Cotizar */}
+        <div className="d-flex flex-column gap-2 mt-auto">
+          <Boton
+            texto={
+              sinStock
+                ? 'Sin Stock'
+                : agregadoReciente
+                ? '✓ ¡Agregado!'
+                : '🛒 Agregar / Comprar'
+            }
+            variante={agregadoReciente ? 'success' : 'warning'}
+            alHacerClic={manejarAgregarCarrito}
+            deshabilitado={sinStock}
+          />
+
+          <div className="d-flex gap-2">
+            <Boton
+              texto="📄 Cotizar"
+              variante="outline-dark"
+              alHacerClic={() => manejadorCotizar && manejadorCotizar(producto, cantidad)}
+            />
+            {manejadorVerDetalle && (
+              <Boton
+                texto="Ver"
+                variante="outline-secondary"
+                alHacerClic={() => manejadorVerDetalle(producto)}
+              />
+            )}
+          </div>
         </div>
       </Card.Body>
     </Card>
