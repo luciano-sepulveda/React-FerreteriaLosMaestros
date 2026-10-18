@@ -3,24 +3,28 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LayoutPrincipal from './components/templates/LayoutPrincipal';
 import Inicio from './pages/Inicio';
 import Catalogo from './pages/Catalogo';
+import Carrito from './pages/Carrito';
 import Login from './pages/Login';
 import NoEncontrada from './pages/NoEncontrada';
-
+import { CarritoProvider } from './context/Carrito';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<LayoutPrincipal />}>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/catalogo" element={<Catalogo />} />
-          <Route path="/categoria/:nombre" element={<Catalogo />} />
-          <Route path="/buscar/:texto" element={<Catalogo />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NoEncontrada />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CarritoProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<LayoutPrincipal />}>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/categoria/:nombre" element={<Catalogo />} />
+            <Route path="/buscar/:texto" element={<Catalogo />} />
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NoEncontrada />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CarritoProvider>
   );
 };
 
