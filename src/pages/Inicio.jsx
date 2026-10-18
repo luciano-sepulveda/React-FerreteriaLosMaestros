@@ -5,11 +5,12 @@ import TarjetaProducto from '../components/molecules/TarjetaProducto';
 import { listarProductos } from '../services/productoService';
 import { CATEGORIAS } from '../data/productos';
 import useTituloPagina from '../hooks/useTituloPagina';
-
+import useCarrito from '../hooks/useCarrito';
 
 const Inicio = () => {
   useTituloPagina('Inicio');
   const navegar = useNavigate();
+  const { agregarAlCarrito } = useCarrito();
   const [productosDestacados, setProductosDestacados] = useState([]);
 
   useEffect(() => {
@@ -17,6 +18,15 @@ const Inicio = () => {
     // 3 productos destacados para la vitrina inicial
     setProductosDestacados(todosLosProductos.slice(0, 3));
   }, []);
+
+  const manejarAgregarCarrito = (producto, cantidad = 1) => {
+    agregarAlCarrito(producto, cantidad);
+  };
+
+  const manejarCotizar = (producto, cantidad = 1) => {
+    agregarAlCarrito(producto, cantidad);
+    navegar('/carrito');
+  };
 
   return (
     <div>
@@ -62,7 +72,7 @@ const Inicio = () => {
                   <li className="mb-2">✓ Cuenta corriente y pago a 30 días</li>
                   <li className="mb-2">✓ Despacho directo a faenas y obras</li>
                   <li className="mb-2">✓ Alertas de stock en tiempo real</li>
-                  <li>✓ Cotizaciones instantáneas sin esperas</li>
+                  <li>✓ Cotizaciones y compras online sin esperas</li>
                 </ul>
               </Card>
             </Col>
@@ -103,7 +113,7 @@ const Inicio = () => {
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
               <h2 className="fw-bold text-dark mb-1">Productos Destacados en Bodega</h2>
-              <p className="text-muted small mb-0">Disponibilidad inmediata para retiro en sucursal</p>
+              <p className="text-muted small mb-0">Disponibilidad inmediata para retiro o despacho</p>
             </div>
             <Button variant="outline-dark" size="sm" onClick={() => navegar('/catalogo')}>
               Ver todos ({listarProductos().length}) →
@@ -115,7 +125,8 @@ const Inicio = () => {
               <Col key={productoItem.id} xs={12} sm={6} lg={4}>
                 <TarjetaProducto
                   producto={productoItem}
-                  alCotizar={() => navegar('/catalogo')}
+                  alAgregarAlCarrito={manejarAgregarCarrito}
+                  alCotizar={manejarCotizar}
                 />
               </Col>
             ))}
