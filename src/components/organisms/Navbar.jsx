@@ -37,6 +37,9 @@ const Navbar = () => {
             <Nav.Link as={NavLink} to="/catalogo" className="fw-semibold">
               Catálogo
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/ofertas" className="fw-semibold text-warning">
+              🔥 Ofertas
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/carrito" className="fw-semibold">
               Carrito y Compras
             </Nav.Link>

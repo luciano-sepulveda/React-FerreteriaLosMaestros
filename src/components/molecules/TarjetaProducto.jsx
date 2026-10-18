@@ -5,6 +5,7 @@ import Precio from '../atoms/Precio';
 import Stock from '../atoms/Stock';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
+import Descuento from '../atoms/Descuento';
 import ControlCantidad from './ControlCantidad';
 
 const TarjetaProducto = ({
@@ -28,6 +29,9 @@ const TarjetaProducto = ({
     categoria,
     unidad,
     precioVenta,
+    precioAnterior,
+    enOferta,
+    porcentajeDescuento,
     stock,
     stockMinimo,
     descripcion
@@ -78,8 +82,18 @@ const TarjetaProducto = ({
         </Card.Text>
 
         <div className="mt-2 pt-2 border-top">
-          <span className="text-muted small d-block">Precio Venta (IVA inc.)</span>
-          <Precio valor={precioVenta} />
+          <div className="d-flex justify-content-between align-items-center mb-1">
+            <span className="text-muted small">Precio Venta (IVA inc.)</span>
+            {enOferta && <Descuento porcentaje={porcentajeDescuento} />}
+          </div>
+          <div className="d-flex align-items-baseline gap-2">
+            <Precio valor={precioVenta} />
+            {precioAnterior && (
+              <span className="text-muted text-decoration-line-through small">
+                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(precioAnterior)}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Control de cantidad para agregar/comprar */}

@@ -21,6 +21,9 @@ export const productosIniciales = [
     unidad: 'Saco 25kg',
     precioCompra: 4200,
     precioVenta: 5690,
+    precioAnterior: 6490,
+    porcentajeDescuento: 12,
+    enOferta: true,
     stock: 80,
     stockMinimo: 20,
     descripcion: 'Cemento de alta resistencia para fundaciones, sobrecimientos y losas estructurales.'
@@ -49,6 +52,9 @@ export const productosIniciales = [
     unidad: 'Galón (3.78 L)',
     precioCompra: 16500,
     precioVenta: 22990,
+    precioAnterior: 26990,
+    porcentajeDescuento: 15,
+    enOferta: true,
     stock: 25,
     stockMinimo: 10,
     descripcion: 'Esmalte satinado lavable de alto rendimiento para muros interiores y exteriores.'
@@ -77,6 +83,9 @@ export const productosIniciales = [
     unidad: 'Unidad',
     precioCompra: 34000,
     precioVenta: 48990,
+    precioAnterior: 59990,
+    porcentajeDescuento: 18,
+    enOferta: true,
     stock: 15,
     stockMinimo: 5,
     descripcion: 'Motor potente de 750W con velocidad variable reversible y selector percutor.'
@@ -133,6 +142,9 @@ export const productosIniciales = [
     unidad: 'Rollo 100m',
     precioCompra: 26000,
     precioVenta: 35990,
+    precioAnterior: 41990,
+    porcentajeDescuento: 14,
+    enOferta: true,
     stock: 14,
     stockMinimo: 8,
     descripcion: 'Conductor eléctrico para instalaciones residenciales según normativa SEC.'
@@ -161,6 +173,9 @@ export const productosIniciales = [
     unidad: 'Caja 1000 u.',
     precioCompra: 5500,
     precioVenta: 8490,
+    precioAnterior: 9990,
+    porcentajeDescuento: 15,
+    enOferta: true,
     stock: 50,
     stockMinimo: 20,
     descripcion: 'Tornillos punta broca autorroscantes para fijación de placas de yeso-cartón sobre metal.'
@@ -189,6 +204,9 @@ export const productosIniciales = [
     unidad: 'Unidad',
     precioCompra: 3400,
     precioVenta: 5290,
+    precioAnterior: 6490,
+    porcentajeDescuento: 18,
+    enOferta: true,
     stock: 22,
     stockMinimo: 10,
     descripcion: 'Casco dieléctrico de polietileno de alta densidad para faenas de construcción.'
@@ -217,6 +235,9 @@ export const productosIniciales = [
     unidad: 'Rollo 25m',
     precioCompra: 9900,
     precioVenta: 14490,
+    precioAnterior: 16990,
+    porcentajeDescuento: 15,
+    enOferta: true,
     stock: 16,
     stockMinimo: 8,
     descripcion: 'Manguera resistente a rayos UV con tejido de malla antitorsión de 3 capas.'
