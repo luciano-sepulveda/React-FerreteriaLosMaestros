@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import Precio from '../atoms/Precio';
 import Stock from '../atoms/Stock';
 import Boton from '../atoms/Boton';
@@ -15,10 +16,12 @@ const TarjetaProducto = ({
   alVerDetalle,
   onVerDetalle
 }) => {
+  const navegar = useNavigate();
   const [cantidad, setCantidad] = useState(1);
   const [agregadoReciente, setAgregadoReciente] = useState(false);
 
   const {
+    id,
     codigo,
     nombre,
     marca,
@@ -32,7 +35,6 @@ const TarjetaProducto = ({
 
   const sinStock = stock <= 0;
   const manejadorCotizar = alCotizar || onCotizar;
-  const manejadorVerDetalle = alVerDetalle || onVerDetalle;
   const manejadorAgregar = alAgregarAlCarrito || alComprar;
 
   const manejarAgregarCarrito = () => {
@@ -40,6 +42,14 @@ const TarjetaProducto = ({
       manejadorAgregar(producto, cantidad);
       setAgregadoReciente(true);
       setTimeout(() => setAgregadoReciente(false), 1800);
+    }
+  };
+
+  const manejarVer = () => {
+    if (alVerDetalle || onVerDetalle) {
+      (alVerDetalle || onVerDetalle)(producto);
+    } else {
+      navegar(`/producto/${id}`);
     }
   };
 
@@ -54,7 +64,12 @@ const TarjetaProducto = ({
         </div>
 
         <span className="text-muted small mb-1">{categoria} · {marca}</span>
-        <Card.Title className="h6 fw-bold text-dark text-truncate" title={nombre}>
+        <Card.Title
+          className="h6 fw-bold text-dark text-truncate cursor-pointer"
+          title={nombre}
+          onClick={manejarVer}
+          style={{ cursor: 'pointer' }}
+        >
           {nombre}
         </Card.Title>
 
@@ -80,7 +95,7 @@ const TarjetaProducto = ({
           </div>
         )}
 
-        {/* Acciones principales: Comprar/Agregar y Cotizar */}
+        {/* Acciones principales: Comprar/Agregar, Cotizar y Ver Detalle */}
         <div className="d-flex flex-column gap-2 mt-auto">
           <Boton
             texto={
@@ -101,13 +116,11 @@ const TarjetaProducto = ({
               variante="outline-dark"
               alHacerClic={() => manejadorCotizar && manejadorCotizar(producto, cantidad)}
             />
-            {manejadorVerDetalle && (
-              <Boton
-                texto="Ver"
-                variante="outline-secondary"
-                alHacerClic={() => manejadorVerDetalle(producto)}
-              />
-            )}
+            <Boton
+              texto="🔍 Ver"
+              variante="outline-secondary"
+              alHacerClic={manejarVer}
+            />
           </div>
         </div>
       </Card.Body>
