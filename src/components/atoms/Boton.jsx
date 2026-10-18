@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-
 const Boton = ({
   texto,
+  children,
   tipo = 'button',
   type,
   variante = 'warning',
@@ -11,17 +11,23 @@ const Boton = ({
   alHacerClic,
   onClick,
   deshabilitado = false,
-  disabled
+  disabled,
+  tamano,
+  size,
+  claseAdicional = ''
 }) => {
+  const claseFinal = claseAdicional ? `${claseAdicional} fw-bold` : 'w-100 fw-bold';
+
   return (
     <Button
       variant={variant || variante}
       type={type || tipo}
       onClick={alHacerClic || onClick}
       disabled={disabled || deshabilitado}
-      className="w-100 fw-bold"
+      size={size || tamano}
+      className={claseFinal.trim()}
     >
-      {texto}
+      {texto || children}
     </Button>
   );
 };
