@@ -40,8 +40,17 @@ const Navbar = () => {
             <Nav.Link as={NavLink} to="/ofertas" className="fw-semibold text-warning">
               🔥 Ofertas
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/nosotros" className="fw-semibold">
+              Nosotros
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/blog" className="fw-semibold">
+              Blog
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/contacto" className="fw-semibold">
+              Contacto
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/carrito" className="fw-semibold">
-              Carrito y Compras
+              Carrito
             </Nav.Link>
           </Nav>
 
@@ -74,6 +83,17 @@ const Navbar = () => {
                   {cantidadTotalArticulos}
                 </Etiqueta>
               )}
+            </Button>
+
+            <Button
+              as={NavLink}
+              to="/admin"
+              variant="outline-light"
+              size="sm"
+              className="fw-semibold px-2"
+              title="Panel de Administración de Bodega"
+            >
+              ⚙️ Admin
             </Button>
 
             <Button

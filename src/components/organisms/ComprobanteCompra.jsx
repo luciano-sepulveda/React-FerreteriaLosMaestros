@@ -11,9 +11,8 @@ const ComprobanteCompra = ({
 }) => {
   if (!orden) return null;
 
-  const esCotizacion = orden.esCotizacion;
-  const tituloDocumento = esCotizacion ? 'Cotización Formal' : 'Comprobante de Compra y Pedido';
-  const folio = orden.folio || (esCotizacion ? `COT-${Date.now().toString().slice(-6)}` : `ORD-${Date.now().toString().slice(-6)}`);
+  const esCotizacion = Boolean(orden.esCotizacion);
+  const folio = orden.folio || (esCotizacion ? 'COT-000001' : 'ORD-000001');
 
   const manejarImprimir = () => {
     window.print();

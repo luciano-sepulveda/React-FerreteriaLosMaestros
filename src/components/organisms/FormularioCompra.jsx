@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Form, Alert } from 'react-bootstrap';
+import { Card, Row, Col, Form } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
