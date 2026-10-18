@@ -46,5 +46,21 @@ export function validarRequerido(valor, nombreCampo = 'Este campo') {
   return '';
 }
 
+/**
+ * Valida un RUT o cédula chilena.
+ * @param {string} rut
+ * @returns {string} Mensaje de error o '' si es válido
+ */
+export function validarRut(rut) {
+  if (!rut || rut.trim() === '') {
+    return 'El RUT es obligatorio.';
+  }
+  const rutLimpio = rut.replace(/\./g, '').replace(/-/g, '').trim();
+  if (rutLimpio.length < 8 || rutLimpio.length > 9) {
+    return 'El RUT debe tener entre 8 y 9 dígitos (ej: 12345678-9).';
+  }
+  return '';
+}
+
 // Alias de retrocompatibilidad
 export const validarEmail = validarCorreo;
