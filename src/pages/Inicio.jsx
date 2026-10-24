@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import TarjetaProducto from '../components/molecules/TarjetaProducto';
@@ -12,8 +11,8 @@ const Inicio = () => {
   useTituloPagina('Inicio');
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productosDestacados, setProductosDestacados] = useState(() => listarProductos().slice(0, 3));
-  const [categorias, setCategorias] = useState(() => listarCategorias());
+  const productosDestacados = listarProductos().slice(0, 3);
+  const categorias = listarCategorias();
 
 
   const manejarAgregarCarrito = (producto, cantidad = 1) => {

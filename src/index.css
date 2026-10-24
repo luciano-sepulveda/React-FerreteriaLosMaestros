@@ -46,3 +46,43 @@ body {
 .ancho-maximo-800 {
   max-width: 800px;
 }
+
+.ancho-maximo-240 {
+  max-width: 240px;
+}
+
+.ancho-maximo-650 {
+  max-width: 650px;
+}
+
+.ancho-maximo-860 {
+  max-width: 860px;
+}
+
+.ancho-maximo-300 {
+  max-width: 300px;
+}
+
+.ancho-maximo-180 {
+  max-width: 180px;
+}
+
+.ancho-maximo-200 {
+  max-width: 200px;
+}
+
+.ancho-maximo-80 {
+  max-width: 80px;
+}
+
+.ancho-minimo-110 {
+  min-width: 110px;
+}
+
+.interlineado-amplio {
+  line-height: 1.8;
+}
+
+.texto-salto-linea {
+  white-space: pre-line;
+}

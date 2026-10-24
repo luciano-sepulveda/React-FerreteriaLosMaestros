@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Tab, Nav, Alert, Badge } from 'react-bootstrap';
+import { Container, Tab, Nav, Alert } from 'react-bootstrap';
 import {
   listarProductos,
   crearProducto,
@@ -32,17 +32,14 @@ import useTituloPagina from '../hooks/useTituloPagina';
 import Boton from '../components/atoms/Boton';
 import Etiqueta from '../components/atoms/Etiqueta';
 import FormularioProducto from '../components/organisms/FormularioProducto';
-import FormularioCategoria from '../components/organisms/FormularioCategoria';
-import FormularioUsuario from '../components/organisms/FormularioUsuario';
 import ResumenDashboard from '../components/organisms/ResumenDashboard';
 import TablaInventario from '../components/organisms/TablaInventario';
-import TablaCriticos from '../components/organisms/TablaCriticos';
-import TablaPedidos from '../components/organisms/TablaPedidos';
-import TablaUsuarios from '../components/organisms/TablaUsuarios';
-import TablaCategorias from '../components/organisms/TablaCategorias';
+import PanelCriticos from '../components/organisms/PanelCriticos';
+import PanelSolicitudes from '../components/organisms/PanelSolicitudes';
+import PanelCategorias from '../components/organisms/PanelCategorias';
+import PanelUsuarios from '../components/organisms/PanelUsuarios';
 import PanelReportes from '../components/organisms/PanelReportes';
 import PerfilAdministrador from '../components/organisms/PerfilAdministrador';
-import ComprobanteCompra from '../components/organisms/ComprobanteCompra';
 
 const Administracion = () => {
   useTituloPagina('Panel de Administración - Ferretería Los Maestros');
@@ -299,145 +296,69 @@ const Administracion = () => {
           </Tab.Pane>
 
           <Tab.Pane eventKey="criticos">
-            <div className="bg-white p-4 rounded-4 shadow-sm border">
-              <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                <div>
-                  <h5 className="fw-bold text-danger mb-0">Gestión de Stock Crítico y Reposición</h5>
-                  <small className="text-muted">Productos que requieren compra urgente a proveedores.</small>
-                </div>
-                <Badge bg="danger" className="fs-6 px-3 py-2">
-                  {criticos.length} alertas activas
-                </Badge>
-              </div>
-
-              <TablaCriticos criticos={criticos} alReponerStock={manejarReponerStock} />
-            </div>
+            <PanelCriticos
+              criticos={criticos}
+              alReponerStock={manejarReponerStock}
+            />
           </Tab.Pane>
 
           <Tab.Pane eventKey="solicitudes">
-            <div className="bg-white p-4 rounded-4 shadow-sm border">
-              <h5 className="fw-bold text-dark border-bottom pb-2 mb-3">
-                Historial de Solicitudes y Pedidos Recibidos
-              </h5>
-
-              {pedidoDetalle ? (
-                <ComprobanteCompra
-                  orden={pedidoDetalle}
-                  alVolverAlCatalogo={() => setPedidoDetalle(null)}
-                  textoVolver="Volver a solicitudes"
-                />
-              ) : (
-                <TablaPedidos
-                  pedidos={solicitudes}
-                  alVerDetalle={(pedido) => setPedidoDetalle(pedido)}
-                />
-              )}
-            </div>
+            <PanelSolicitudes
+              solicitudes={solicitudes}
+              pedidoDetalle={pedidoDetalle}
+              alVerDetalle={(pedido) => setPedidoDetalle(pedido)}
+              alVolverSolicitudes={() => setPedidoDetalle(null)}
+            />
           </Tab.Pane>
 
           <Tab.Pane eventKey="categorias">
-            <div className="bg-white p-4 rounded-4 shadow-sm border">
-              <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                <div>
-                  <h5 className="fw-bold text-dark mb-0">Gestión de Categorías</h5>
-                  <small className="text-muted">Clasificación de productos del catálogo.</small>
-                </div>
-                <Boton
-                  variante="warning"
-                  tamano="sm"
-                  claseAdicional="w-auto px-3 fw-bold"
-                  alHacerClic={() => {
-                    setCategoriaEditando(null);
-                    setMostrarFormularioCategoria(true);
-                  }}
-                  texto="➕ Nueva Categoría"
-                />
-              </div>
-
-              {mostrarFormularioCategoria && (
-                <FormularioCategoria
-                  categoriaAEditar={categoriaEditando}
-                  alGuardar={manejarGuardarCategoria}
-                  alCancelar={() => {
-                    setMostrarFormularioCategoria(false);
-                    setCategoriaEditando(null);
-                  }}
-                />
-              )}
-
-              <TablaCategorias
-                categorias={categorias}
-                alEditarCategoria={(cat) => {
-                  setCategoriaEditando(cat);
-                  setMostrarFormularioCategoria(true);
-                }}
-              />
-            </div>
+            <PanelCategorias
+              categorias={categorias}
+              mostrarFormularioCategoria={mostrarFormularioCategoria}
+              categoriaEditando={categoriaEditando}
+              alNuevaCategoria={() => {
+                setCategoriaEditando(null);
+                setMostrarFormularioCategoria(true);
+              }}
+              alGuardarCategoria={manejarGuardarCategoria}
+              alCancelarCategoria={() => {
+                setMostrarFormularioCategoria(false);
+                setCategoriaEditando(null);
+              }}
+              alEditarCategoria={(cat) => {
+                setCategoriaEditando(cat);
+                setMostrarFormularioCategoria(true);
+              }}
+            />
           </Tab.Pane>
 
           <Tab.Pane eventKey="usuarios">
-            <div className="bg-white p-4 rounded-4 shadow-sm border">
-              <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                <div>
-                  <h5 className="fw-bold text-dark mb-0">Directorio de Usuarios y Clientes</h5>
-                  <small className="text-muted">Particulares, contratistas y administradores.</small>
-                </div>
-                <Boton
-                  variante="warning"
-                  tamano="sm"
-                  claseAdicional="w-auto px-3 fw-bold"
-                  alHacerClic={() => {
-                    setUsuarioEditando(null);
-                    setMostrarFormularioUsuario(true);
-                  }}
-                  texto="➕ Nuevo Usuario"
-                />
-              </div>
-
-              {mostrarFormularioUsuario && (
-                <FormularioUsuario
-                  usuarioAEditar={usuarioEditando}
-                  alGuardar={manejarGuardarUsuario}
-                  alCancelar={() => {
-                    setMostrarFormularioUsuario(false);
-                    setUsuarioEditando(null);
-                  }}
-                />
-              )}
-
-              {usuarioHistorial ? (
-                <div>
-                  <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h6 className="fw-bold mb-0">
-                      Historial de compras y cotizaciones de: {usuarioHistorial.nombreCompleto} ({usuarioHistorial.correo})
-                    </h6>
-                    <Boton
-                      variante="outline-dark"
-                      tamano="sm"
-                      claseAdicional="w-auto px-3"
-                      alHacerClic={() => setUsuarioHistorial(null)}
-                      texto="← Volver a usuarios"
-                    />
-                  </div>
-                  <TablaPedidos
-                    pedidos={pedidosHistorialUsuario}
-                    alVerDetalle={(pedido) => {
-                      setPedidoDetalle(pedido);
-                      setPestanaActiva('solicitudes');
-                    }}
-                  />
-                </div>
-              ) : (
-                <TablaUsuarios
-                  usuarios={usuarios}
-                  alEditarUsuario={(usr) => {
-                    setUsuarioEditando(usr);
-                    setMostrarFormularioUsuario(true);
-                  }}
-                  alVerHistorial={(usr) => setUsuarioHistorial(usr)}
-                />
-              )}
-            </div>
+            <PanelUsuarios
+              usuarios={usuarios}
+              mostrarFormularioUsuario={mostrarFormularioUsuario}
+              usuarioEditando={usuarioEditando}
+              usuarioHistorial={usuarioHistorial}
+              pedidosHistorialUsuario={pedidosHistorialUsuario}
+              alNuevoUsuario={() => {
+                setUsuarioEditando(null);
+                setMostrarFormularioUsuario(true);
+              }}
+              alGuardarUsuario={manejarGuardarUsuario}
+              alCancelarUsuario={() => {
+                setMostrarFormularioUsuario(false);
+                setUsuarioEditando(null);
+              }}
+              alEditarUsuario={(usr) => {
+                setUsuarioEditando(usr);
+                setMostrarFormularioUsuario(true);
+              }}
+              alVerHistorial={(usr) => setUsuarioHistorial(usr)}
+              alVolverUsuarios={() => setUsuarioHistorial(null)}
+              alVerDetallePedido={(pedido) => {
+                setPedidoDetalle(pedido);
+                setPestanaActiva('solicitudes');
+              }}
+            />
           </Tab.Pane>
 
           <Tab.Pane eventKey="reportes">

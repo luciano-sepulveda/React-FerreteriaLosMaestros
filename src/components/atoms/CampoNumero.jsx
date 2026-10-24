@@ -27,8 +27,7 @@ const CampoNumero = ({
       max={maximo}
       onChange={manejarCambio}
       disabled={deshabilitado}
-      className={`text-center fw-bold ${claseAdicional}`.trim()}
-      style={{ maxWidth: '80px' }}
+      className={`text-center fw-bold ancho-maximo-80 ${claseAdicional}`.trim()}
       aria-label="Cantidad seleccionada"
     />
   );

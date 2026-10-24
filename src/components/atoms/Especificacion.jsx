@@ -6,7 +6,7 @@ const Especificacion = ({
 }) => {
   return (
     <div className={`p-2 bg-light rounded border ${claseAdicional}`.trim()}>
-      <span className="text-muted small d-block" style={{ fontSize: '0.75rem' }}>
+      <span className="text-muted small d-block texto-tamano-chico">
         {etiqueta}
       </span>
       <span className="fw-semibold text-dark small">

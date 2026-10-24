@@ -39,7 +39,7 @@ export const productosIniciales = [
     precioCompra: 1500,
     precioVenta: 2490,
     stock: 12,
-    stockMinimo: 30, // Alerta: stock bajo
+    stockMinimo: 30,
     descripcion: 'Arena gruesa zarandeada apta para mezclas de hormigón y mampostería.'
   },
   {
@@ -70,7 +70,7 @@ export const productosIniciales = [
     precioCompra: 14000,
     precioVenta: 19990,
     stock: 4,
-    stockMinimo: 8, // Alerta: stock bajo
+    stockMinimo: 8,
     descripcion: 'Protección anticorrosiva de secado rápido para estructuras metálicas y perfiles.'
   },
   {
@@ -129,7 +129,7 @@ export const productosIniciales = [
     precioCompra: 3200,
     precioVenta: 4990,
     stock: 6,
-    stockMinimo: 15, // Alerta: stock bajo
+    stockMinimo: 15,
     descripcion: 'Válvula de bola de latón niquelado con manilla tipo palanca para agua fría o caliente.'
   },
   {
@@ -222,7 +222,7 @@ export const productosIniciales = [
     precioCompra: 24000,
     precioVenta: 34990,
     stock: 2,
-    stockMinimo: 6, // Alerta: stock bajo
+    stockMinimo: 6,
     descripcion: 'Calzado ergonómico liviano, dieléctrico y resistente a hidrocarburos.'
   },
   {

@@ -19,7 +19,7 @@ const Blog = () => {
           Biblioteca de Consejos y Normativa
         </span>
         <h1 className="display-5 fw-extrabold text-dark">Blog Técnico Los Maestros</h1>
-        <p className="text-muted mx-auto" style={{ maxWidth: '650px' }}>
+        <p className="text-muted mx-auto ancho-maximo-650">
           Recomendaciones prácticas, guías de dosificación de materiales y normativas vigentes escritas por nuestros especialistas para tus proyectos.
         </p>
       </div>

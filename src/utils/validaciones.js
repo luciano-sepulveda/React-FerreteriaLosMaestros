@@ -1,12 +1,3 @@
-// Funciones puras de validación en español (Guía 14, páginas 19-20)
-// "Reciben un valor y devuelven un mensaje de error, o texto vacío si está bien.
-// No tocan la pantalla ni el estado. Se pueden probar solas con pruebas unitarias."
-
-/**
- * Valida un correo electrónico.
- * @param {string} correo 
- * @returns {string} Mensaje de error o '' si es válido
- */
 export function validarCorreo(correo) {
   if (!correo || correo.trim() === '') {
     return 'El correo electrónico es obligatorio.';
@@ -18,11 +9,6 @@ export function validarCorreo(correo) {
   return '';
 }
 
-/**
- * Valida la contraseña para inicio de sesión.
- * @param {string} clave 
- * @returns {string} Mensaje de error o '' si es válido
- */
 export function validarClave(clave) {
   if (!clave || clave.trim() === '') {
     return 'La contraseña es obligatoria.';
@@ -33,12 +19,6 @@ export function validarClave(clave) {
   return '';
 }
 
-/**
- * Valida campos de texto requeridos genéricos.
- * @param {string} valor 
- * @param {string} nombreCampo 
- * @returns {string} Mensaje de error o '' si es válido
- */
 export function validarRequerido(valor, nombreCampo = 'Este campo') {
   if (!valor || valor.trim() === '') {
     return `${nombreCampo} es obligatorio.`;
@@ -46,11 +26,6 @@ export function validarRequerido(valor, nombreCampo = 'Este campo') {
   return '';
 }
 
-/**
- * Valida un RUT o cédula chilena.
- * @param {string} rut
- * @returns {string} Mensaje de error o '' si es válido
- */
 export function validarRut(rut) {
   if (!rut || rut.trim() === '') {
     return 'El RUT es obligatorio.';
@@ -62,5 +37,4 @@ export function validarRut(rut) {
   return '';
 }
 
-// Alias de retrocompatibilidad
 export const validarEmail = validarCorreo;

@@ -25,7 +25,7 @@ const TarjetaArticulo = ({ articulo, alVerArticulo }) => {
             {categoria}
           </Etiqueta>
         </div>
-        <small className="text-muted" style={{ fontSize: '0.75rem' }}>
+        <small className="text-muted texto-tamano-chico">
           ⏱️ {tiempoLectura}
         </small>
       </Card.Header>
@@ -40,10 +40,10 @@ const TarjetaArticulo = ({ articulo, alVerArticulo }) => {
         </Card.Text>
 
         <div className="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-          <small className="text-secondary fw-semibold text-truncate" style={{ maxWidth: '180px' }}>
+          <small className="text-secondary fw-semibold text-truncate ancho-maximo-180">
             ✍️ {autor}
           </small>
-          <div style={{ minWidth: '110px' }}>
+          <div className="ancho-minimo-110">
             <Boton
               texto="Leer Más →"
               variante="outline-dark"

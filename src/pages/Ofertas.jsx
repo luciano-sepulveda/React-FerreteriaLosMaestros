@@ -12,7 +12,7 @@ const Ofertas = () => {
   useTituloPagina('Ofertas y Remates - Ferretería Los Maestros');
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productosEnOferta, setProductosEnOferta] = useState(() => listarOfertas());
+  const productosEnOferta = listarOfertas();
   const [alerta, setAlerta] = useState('');
 
 

@@ -19,7 +19,7 @@ const DetalleBlog = () => {
         <div className="bg-white p-5 rounded-4 shadow-sm border">
           <h3 className="fw-bold text-dark mb-2">Artículo no encontrado</h3>
           <p className="text-muted mb-4">La entrada que buscas no existe o ha sido movida.</p>
-          <div className="d-inline-block" style={{ maxWidth: '200px' }}>
+          <div className="d-inline-block ancho-maximo-200">
             <Boton
               texto="← Volver al Blog"
               variante="warning"
@@ -42,7 +42,7 @@ const DetalleBlog = () => {
   } = articulo;
 
   return (
-    <Container className="py-5" style={{ maxWidth: '860px' }}>
+    <Container className="py-5 ancho-maximo-860">
       <Breadcrumb className="small mb-4">
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/' }}>
           Inicio
@@ -50,7 +50,7 @@ const DetalleBlog = () => {
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/blog' }}>
           Blog
         </Breadcrumb.Item>
-        <Breadcrumb.Item active className="text-truncate" style={{ maxWidth: '300px' }}>
+        <Breadcrumb.Item active className="text-truncate ancho-maximo-300">
           {titulo}
         </Breadcrumb.Item>
       </Breadcrumb>
@@ -72,7 +72,7 @@ const DetalleBlog = () => {
         </Card.Header>
 
         <Card.Body className="p-4 p-md-5">
-          <div className="text-secondary fs-6" style={{ lineHeight: '1.8', whiteSpace: 'pre-line' }}>
+          <div className="text-secondary fs-6 interlineado-amplio texto-salto-linea">
             {contenidoCompleto}
           </div>
 
@@ -80,7 +80,7 @@ const DetalleBlog = () => {
             <div className="small text-muted">
               ¿Tienes dudas técnicas para tu obra? Escríbenos a <strong>contacto@ferreterialosmaestros.cl</strong>
             </div>
-            <div style={{ minWidth: '180px' }}>
+            <div className="ancho-minimo-180">
               <Boton
                 texto="← Volver a Artículos"
                 variante="outline-dark"

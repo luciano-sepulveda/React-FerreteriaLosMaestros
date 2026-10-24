@@ -12,7 +12,7 @@ const Contacto = () => {
           Atención al Cliente y Ventas Empresa
         </span>
         <h1 className="display-5 fw-extrabold text-dark">Contáctanos</h1>
-        <p className="text-muted mx-auto" style={{ maxWidth: '650px' }}>
+        <p className="text-muted mx-auto ancho-maximo-650">
           ¿Necesitas cotizar por volumen, consultar stock en bodega o coordinar un despacho a obra? Estamos a tu disposición en La Serena.
         </p>
       </div>

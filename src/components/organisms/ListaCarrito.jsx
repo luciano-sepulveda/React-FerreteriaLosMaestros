@@ -17,7 +17,7 @@ const ListaCarrito = ({
         <p className="text-muted mb-4">
           Explora nuestro catálogo de materiales, herramientas y suministros para comenzar a comprar o cotizar.
         </p>
-        <div className="d-inline-block" style={{ maxWidth: '240px', width: '100%' }}>
+        <div className="d-inline-block ancho-maximo-240 w-100">
           <Boton
             texto="Explorar Catálogo"
             variante="warning"
@@ -39,7 +39,7 @@ const ListaCarrito = ({
         </div>
 
         {alVaciar && (
-          <div style={{ width: 'auto' }}>
+          <div className="w-auto">
             <Boton
               texto="Vaciar carrito"
               variante="outline-danger"

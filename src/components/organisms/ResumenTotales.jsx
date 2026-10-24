@@ -29,7 +29,6 @@ const ResumenTotales = ({
       </Card.Header>
 
       <Card.Body className="p-3 p-md-4">
-        {/* Selector de modo de entrega */}
         <div className="mb-3 p-3 bg-light rounded-3 border">
           <label className="fw-bold small text-dark d-block mb-2">Método de Entrega:</label>
           <Form.Check
@@ -52,7 +51,6 @@ const ResumenTotales = ({
           />
         </div>
 
-        {/* Molécula con desglose neto, iva y total */}
         <ResumenTotal
           subtotalNeto={subtotalNeto}
           montoIva={montoIva}
@@ -61,7 +59,6 @@ const ResumenTotales = ({
           esEnvioGratis={!esEnvio}
         />
 
-        {/* Acciones principales: Comprar o Cotizar */}
         <div className="d-flex flex-column gap-2 mt-4">
           <Boton
             texto="💳 Proceder a la Compra"
@@ -78,7 +75,7 @@ const ResumenTotales = ({
           />
         </div>
 
-        <small className="text-muted d-block text-center mt-3" style={{ fontSize: '0.75rem' }}>
+        <small className="text-muted d-block text-center mt-3 texto-tamano-chico">
           🔒 Transacción protegida. Emisión de boleta o factura con RUT para contratistas.
         </small>
       </Card.Body>

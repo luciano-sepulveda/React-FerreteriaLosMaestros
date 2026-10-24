@@ -4,15 +4,12 @@ const Etiqueta = ({
   texto,
   children,
   variante = 'warning',
-  fondo,
-  bg,
   esPildora = false,
   claseAdicional = ''
 }) => {
-  const colorFondo = bg || fondo || variante;
   return (
     <Badge
-      bg={colorFondo}
+      bg={variante}
       pill={esPildora}
       className={`px-2 py-1 fw-semibold ${claseAdicional}`.trim()}
     >
