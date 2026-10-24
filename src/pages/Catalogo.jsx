@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Alert, Badge } from 'react-bootstrap';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TarjetaProducto from '../components/molecules/TarjetaProducto';
 import FiltroCategoria from '../components/molecules/FiltroCategoria';
+import Boton from '../components/atoms/Boton';
 import { listarProductos } from '../services/productoService';
+import { listarCategorias } from '../services/categoriaService';
 import useTituloPagina from '../hooks/useTituloPagina';
 import useCarrito from '../hooks/useCarrito';
 import { verificarStockBajo } from '../utils/stockUtils';
@@ -12,16 +14,15 @@ const Catalogo = () => {
   const parametros = useParams();
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState(() => listarProductos());
+  const [categorias, setCategorias] = useState(() => listarCategorias());
   const [mensajeNotificacion, setMensajeNotificacion] = useState('');
 
-  // Carga los productos desde el servicio
   useEffect(() => {
-    const listaInicial = listarProductos();
-    setProductos(listaInicial);
+    setProductos(listarProductos());
+    setCategorias(listarCategorias());
   }, []);
 
-  // Determinar productos visibles según parámetros de la ruta 
   let productosVisibles = productos;
   let titulo = 'Catálogo Completo';
   let subtitulo = 'Materiales, herramientas y suministros en stock para contratistas y particulares.';
@@ -48,7 +49,6 @@ const Catalogo = () => {
 
   useTituloPagina(titulo);
 
-  // Alerta de stock bajo para bodegueros / contratistas
   const productosConStockBajo = productosVisibles.filter((prod) =>
     verificarStockBajo(prod.stock, prod.stockMinimo)
   );
@@ -87,18 +87,26 @@ const Catalogo = () => {
           <Badge bg="dark" className="px-3 py-2 fs-6">
             {productosVisibles.length} {productosVisibles.length === 1 ? 'producto' : 'productos'}
           </Badge>
-          <Link to="/carrito" className="btn btn-outline-warning btn-sm fw-bold">
-            Ver Carrito y Totales →
-          </Link>
+          <Boton
+            variante="outline-warning"
+            tamano="sm"
+            claseAdicional="w-auto px-3 fw-bold"
+            alHacerClic={() => navegar('/carrito')}
+            texto="Ver Carrito y Totales →"
+          />
         </div>
       </div>
 
       {mensajeNotificacion && (
         <Alert variant="success" dismissible onClose={() => setMensajeNotificacion('')} className="py-2 d-flex justify-content-between align-items-center">
           <span>{mensajeNotificacion}</span>
-          <Link to="/carrito" className="btn btn-sm btn-success fw-bold ms-3">
-            Ir a Pagar
-          </Link>
+          <Boton
+            variante="success"
+            tamano="sm"
+            claseAdicional="w-auto px-3 fw-bold ms-3"
+            alHacerClic={() => navegar('/carrito')}
+            texto="Ir a Pagar"
+          />
         </Alert>
       )}
 
@@ -111,19 +119,21 @@ const Catalogo = () => {
         </Alert>
       )}
 
-      {/* Molécula FiltroCategoria para navegar entre categorías */}
       <FiltroCategoria
         categoriaSeleccionada={parametros.nombre ? decodeURIComponent(parametros.nombre) : ''}
+        categorias={categorias}
         alSeleccionarCategoria={manejarSeleccionarCategoria}
       />
 
-      {/* Grilla responsiva de tarjetas de producto con Atomic Design */}
       {productosVisibles.length === 0 ? (
         <div className="text-center py-5 bg-white rounded-3 shadow-sm my-4">
           <p className="text-muted fs-5 mb-3">No se encontraron productos para esta búsqueda o categoría.</p>
-          <button className="btn btn-warning fw-bold" onClick={() => navegar('/catalogo')}>
-            Ver Todo el Catálogo
-          </button>
+          <Boton
+            variante="warning"
+            claseAdicional="w-auto px-4 fw-bold mx-auto"
+            alHacerClic={() => navegar('/catalogo')}
+            texto="Ver Todo el Catálogo"
+          />
         </div>
       ) : (
         <Row className="g-4">

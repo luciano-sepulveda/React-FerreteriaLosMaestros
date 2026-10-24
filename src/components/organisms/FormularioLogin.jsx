@@ -1,45 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Alert } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { validarCorreo, validarClave } from '../../utils/validaciones';
 
-
-const FormularioLogin = ({ alEnviar, onEnviar, estaCargando = false, cargando = false }) => {
+const FormularioLogin = ({ alEnviar, estaCargando = false }) => {
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const [errores, setErrores] = useState({ correo: '', clave: '' });
   const [mensajeExito, setMensajeExito] = useState('');
 
-  const estadoCargando = estaCargando || cargando;
-
   const manejarEnvio = (evento) => {
     evento.preventDefault();
 
-    //1 validaciones del correo
     const errorCorreo = validarCorreo(correo);
     const errorClave = validarClave(clave);
 
-    //2 Guardar errores en el estado sin alert
     setErrores({
       correo: errorCorreo,
       clave: errorClave
     });
 
-    //3 Si hay errores no sigue cargando
     if (errorCorreo !== '' || errorClave !== '') {
       setMensajeExito('');
       return;
     }
 
-    //4 todo perfecto y avisa a la página
-    setMensajeExito('Usuario validado con éxito. Sera redirigiendo al catálogo');
-    const accionEnviar = alEnviar || onEnviar;
-    if (accionEnviar) {
-      accionEnviar({
+    setMensajeExito('Usuario validado con éxito. Redirigiendo al catálogo');
+    if (alEnviar) {
+      alEnviar({
         correo,
-        clave,
-        email: correo
+        clave
       });
     }
   };
@@ -100,10 +91,10 @@ const FormularioLogin = ({ alEnviar, onEnviar, estaCargando = false, cargando = 
 
       <div className="mt-4">
         <Boton
-          texto={estadoCargando ? 'Ingresando...' : 'Iniciar Sesión'}
+          texto={estaCargando ? 'Ingresando...' : 'Iniciar Sesión'}
           tipo="submit"
           variante="warning"
-          deshabilitado={estadoCargando}
+          deshabilitado={estaCargando}
         />
       </div>
     </Form>

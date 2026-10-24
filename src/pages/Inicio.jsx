@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import TarjetaProducto from '../components/molecules/TarjetaProducto';
+import Boton from '../components/atoms/Boton';
 import { listarProductos } from '../services/productoService';
-import { CATEGORIAS } from '../data/productos';
+import { listarCategorias } from '../services/categoriaService';
 import useTituloPagina from '../hooks/useTituloPagina';
 import useCarrito from '../hooks/useCarrito';
 
@@ -11,13 +12,9 @@ const Inicio = () => {
   useTituloPagina('Inicio');
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productosDestacados, setProductosDestacados] = useState([]);
+  const [productosDestacados, setProductosDestacados] = useState(() => listarProductos().slice(0, 3));
+  const [categorias, setCategorias] = useState(() => listarCategorias());
 
-  useEffect(() => {
-    const todosLosProductos = listarProductos();
-    // 3 productos destacados para la vitrina inicial
-    setProductosDestacados(todosLosProductos.slice(0, 3));
-  }, []);
 
   const manejarAgregarCarrito = (producto, cantidad = 1) => {
     agregarAlCarrito(producto, cantidad);
@@ -30,7 +27,6 @@ const Inicio = () => {
 
   return (
     <div>
-      {/* Hero Banner Responsivo */}
       <section className="bg-dark text-white py-5 shadow-sm border-bottom border-warning border-3">
         <Container>
           <Row className="align-items-center py-4">
@@ -46,22 +42,20 @@ const Inicio = () => {
                 Atención especializada para particulares y contratistas con despacho a obra y retiro en tienda.
               </p>
               <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                <Button
-                  variant="warning"
-                  size="lg"
-                  className="fw-bold px-4 shadow-sm"
-                  onClick={() => navegar('/catalogo')}
-                >
-                  Explorar Catálogo Completo
-                </Button>
-                <Button
-                  variant="outline-light"
-                  size="lg"
-                  className="px-4"
-                  onClick={() => navegar('/login')}
-                >
-                  Portal Contratistas (Login)
-                </Button>
+                <Boton
+                  variante="warning"
+                  tamano="lg"
+                  claseAdicional="px-4 shadow-sm w-auto"
+                  alHacerClic={() => navegar('/catalogo')}
+                  texto="Explorar Catálogo Completo"
+                />
+                <Boton
+                  variante="outline-light"
+                  tamano="lg"
+                  claseAdicional="px-4 w-auto"
+                  alHacerClic={() => navegar('/login')}
+                  texto="Portal Contratistas (Login)"
+                />
               </div>
             </Col>
             <Col lg={4} className="text-center">
@@ -80,24 +74,22 @@ const Inicio = () => {
         </Container>
       </section>
 
-      {/* Sección 9 Categorías*/}
       <section className="py-5 bg-white">
         <Container>
           <div className="text-center mb-5">
-            <h2 className="fw-bold text-dark">Nuestras 9 Categorías de Especialidad</h2>
+            <h2 className="fw-bold text-dark">Nuestras Categorías de Especialidad</h2>
             <p className="text-muted">Encuentra todo lo que necesitas para tu proyecto o faena</p>
           </div>
 
           <Row className="g-3 justify-content-center">
-            {CATEGORIAS.map((categoriaItem, indice) => (
+            {categorias.map((categoriaItem, indice) => (
               <Col key={categoriaItem} xs={6} sm={4} md={4} lg={3} xl={2}>
                 <Card
-                  className="text-center p-3 h-100 border shadow-sm rounded-3 cursor-pointer bg-light"
-                  style={{ cursor: 'pointer', transition: 'all 0.2s ease-in-out' }}
+                  className="text-center p-3 h-100 border shadow-sm rounded-3 bg-light tarjeta-categoria-efecto"
                   onClick={() => navegar(`/categoria/${encodeURIComponent(categoriaItem)}`)}
                 >
                   <div className="fs-2 mb-2">
-                    {indice === 0 ? '🧱' : indice === 1 ? '🎨' : indice === 2 ? '🔨' : indice === 3 ? '🚰' : indice === 4 ? '⚡' : indice === 5 ? '🔩' : indice === 6 ? '🪵' : indice === 7 ? '🦺' : '🌱'}
+                    {indice % 9 === 0 ? '🧱' : indice % 9 === 1 ? '🎨' : indice % 9 === 2 ? '🔨' : indice % 9 === 3 ? '🚰' : indice % 9 === 4 ? '⚡' : indice % 9 === 5 ? '🔩' : indice % 9 === 6 ? '🪵' : indice % 9 === 7 ? '🦺' : '🌱'}
                   </div>
                   <span className="fw-semibold small text-dark d-block">{categoriaItem}</span>
                 </Card>
@@ -107,7 +99,6 @@ const Inicio = () => {
         </Container>
       </section>
 
-      {/* Productos Destacados */}
       <section className="py-5 bg-light border-top">
         <Container>
           <div className="d-flex justify-content-between align-items-center mb-4">
@@ -115,9 +106,13 @@ const Inicio = () => {
               <h2 className="fw-bold text-dark mb-1">Productos Destacados en Bodega</h2>
               <p className="text-muted small mb-0">Disponibilidad inmediata para retiro o despacho</p>
             </div>
-            <Button variant="outline-dark" size="sm" onClick={() => navegar('/catalogo')}>
-              Ver todos ({listarProductos().length}) →
-            </Button>
+            <Boton
+              variante="outline-dark"
+              tamano="sm"
+              claseAdicional="w-auto px-3"
+              alHacerClic={() => navegar('/catalogo')}
+              texto={`Ver todos (${listarProductos().length}) →`}
+            />
           </div>
 
           <Row className="g-4">

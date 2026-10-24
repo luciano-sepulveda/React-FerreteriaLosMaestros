@@ -1,4 +1,3 @@
-import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import ControlCantidad from './ControlCantidad';
 import Boton from '../atoms/Boton';

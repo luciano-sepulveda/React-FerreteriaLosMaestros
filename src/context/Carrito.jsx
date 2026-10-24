@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const CarritoContext = createContext();
 
@@ -9,8 +9,7 @@ export const CarritoProvider = ({ children }) => {
     try {
       const guardado = localStorage.getItem(CLAVE_ALMACENAMIENTO);
       return guardado ? JSON.parse(guardado) : [];
-    } catch (error) {
-      console.error('Error al cargar carrito desde almacenamiento local:', error);
+    } catch (e) {
       return [];
     }
   });
@@ -18,12 +17,10 @@ export const CarritoProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem(CLAVE_ALMACENAMIENTO, JSON.stringify(elementosCarrito));
-    } catch (error) {
-      console.error('Error al guardar carrito en almacenamiento local:', error);
+    } catch (e) {
     }
   }, [elementosCarrito]);
 
-  // Agregar producto al carrito o incrementar su cantidad
   const agregarAlCarrito = (producto, cantidad = 1) => {
     if (!producto || cantidad <= 0) return;
 
@@ -57,7 +54,6 @@ export const CarritoProvider = ({ children }) => {
     });
   };
 
-  // Modificar cantidad exacta de un producto
   const actualizarCantidad = (idProducto, nuevaCantidad) => {
     if (nuevaCantidad <= 0) {
       eliminarDelCarrito(idProducto);
@@ -82,19 +78,16 @@ export const CarritoProvider = ({ children }) => {
     );
   };
 
-  // Eliminar un producto del carrito
   const eliminarDelCarrito = (idProducto) => {
     setElementosCarrito((elementosPrevios) =>
       elementosPrevios.filter((item) => item.producto.id !== idProducto)
     );
   };
 
-  // Vaciar completamente el carrito
   const vaciarCarrito = () => {
     setElementosCarrito([]);
   };
 
-  // Cálculos de totales financieros
   const cantidadTotalArticulos = elementosCarrito.reduce(
     (acumulador, item) => acumulador + item.cantidad,
     0
@@ -105,9 +98,6 @@ export const CarritoProvider = ({ children }) => {
     0
   );
 
-  // En Chile el IVA es 19% incluido en el precio de venta final
-  // Subtotal Neto = Total / 1.19
-  // IVA = Total - Subtotal Neto
   const subtotalNeto = Math.round(totalPagar / 1.19);
   const montoIva = totalPagar - subtotalNeto;
 
@@ -129,13 +119,3 @@ export const CarritoProvider = ({ children }) => {
     </CarritoContext.Provider>
   );
 };
-
-export const useCarrito = () => {
-  const contexto = useContext(CarritoContext);
-  if (!contexto) {
-    throw new Error('useCarrito debe ser utilizado dentro de un CarritoProvider');
-  }
-  return contexto;
-};
-
-export default CarritoContext;

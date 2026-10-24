@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +30,7 @@ const Footer = () => {
           <Col md={4}>
             <h6 className="fw-bold text-warning mb-2">Casa Matriz</h6>
             <p className="small text-light opacity-75 mb-1">
-              📍 Av. Balmaceda 1420, La Serena · Chile
+              📍 Mendelssohn 142 , La Serena · Chile
             </p>
             <p className="small text-light opacity-75 mb-1">
               📞 +56 51 222 3344 · WhatsApp: +56 9 7654 3210

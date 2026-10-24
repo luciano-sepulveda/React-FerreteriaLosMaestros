@@ -1,48 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Row, Col, Alert } from 'react-bootstrap';
+import { useState, useRef } from 'react';
+import { Form, Row, Col } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { CATEGORIAS } from '../../data/productos';
-import { validarRequerido } from '../../utils/validaciones';
 
 const FormularioProducto = ({
   productoAEditar = null,
   alGuardar,
   alCancelar
 }) => {
-  const [datos, setDatos] = useState({
-    codigo: '',
-    nombre: '',
-    categoria: CATEGORIAS[0] || 'Materiales de construcción',
-    subcategoria: '',
-    marca: '',
-    unidad: 'Unidad',
-    precioCompra: '',
-    precioVenta: '',
-    stock: '',
-    stockMinimo: '10',
-    descripcion: ''
+  const datosIniciales = (p) => ({
+    codigo: p?.codigo || '',
+    nombre: p?.nombre || '',
+    categoria: p?.categoria || CATEGORIAS[0] || 'Materiales de construcción',
+    subcategoria: p?.subcategoria || '',
+    marca: p?.marca || '',
+    unidad: p?.unidad || 'Unidad',
+    precioCompra: p?.precioCompra || '',
+    precioVenta: p?.precioVenta || '',
+    stock: p?.stock || '',
+    stockMinimo: p?.stockMinimo || '10',
+    descripcion: p?.descripcion || ''
   });
 
+  const refAnterior = useRef(productoAEditar);
+  const [datos, setDatos] = useState(() => datosIniciales(productoAEditar));
   const [errores, setErrores] = useState({});
 
-  useEffect(() => {
-    if (productoAEditar) {
-      setDatos({
-        codigo: productoAEditar.codigo || '',
-        nombre: productoAEditar.nombre || '',
-        categoria: productoAEditar.categoria || CATEGORIAS[0],
-        subcategoria: productoAEditar.subcategoria || '',
-        marca: productoAEditar.marca || '',
-        unidad: productoAEditar.unidad || 'Unidad',
-        precioCompra: productoAEditar.precioCompra || '',
-        precioVenta: productoAEditar.precioVenta || '',
-        stock: productoAEditar.stock || '',
-        stockMinimo: productoAEditar.stockMinimo || '10',
-        descripcion: productoAEditar.descripcion || ''
-      });
-    }
-  }, [productoAEditar]);
+  if (refAnterior.current !== productoAEditar) {
+    refAnterior.current = productoAEditar;
+    setDatos(datosIniciales(productoAEditar));
+    setErrores({});
+  }
 
   const manejarCambio = (campo, valor) => {
     setDatos((prev) => ({ ...prev, [campo]: valor }));
@@ -210,7 +199,7 @@ const FormularioProducto = ({
             claseAdicional="px-4"
           />
         )}
-        <div style={{ minWidth: '180px' }}>
+        <div className="ancho-minimo-180">
           <Boton
             tipo="submit"
             texto={productoAEditar ? 'Guardar Cambios' : 'Crear Producto'}

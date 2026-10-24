@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { Container, Breadcrumb } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import DetalleProducto from '../components/organisms/DetalleProducto';
@@ -10,14 +10,7 @@ const PaginaDetalleProducto = () => {
   const { id } = useParams();
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [producto, setProducto] = useState(null);
-
-  useEffect(() => {
-    if (id) {
-      const productoEncontrado = obtenerProducto(id);
-      setProducto(productoEncontrado);
-    }
-  }, [id]);
+  const producto = useMemo(() => (id ? obtenerProducto(id) : null), [id]);
 
   useTituloPagina(producto ? `${producto.nombre} - Ferretería Los Maestros` : 'Detalle de Producto');
 

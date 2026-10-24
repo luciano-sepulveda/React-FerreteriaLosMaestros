@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Row, Col, Form } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
@@ -9,17 +9,18 @@ import { validarRequerido, validarEmail, validarRut } from '../../utils/validaci
 const FormularioCompra = ({
   totalPagar = 0,
   tipoEntrega = 'retiro',
+  datosIniciales,
   alConfirmarCompra,
   alCancelar
 }) => {
   const [datos, setDatos] = useState({
-    nombreCompleto: '',
-    rut: '',
-    correo: '',
-    telefono: '',
-    direccionEntrega: '',
-    comuna: 'La Serena',
-    tipoCliente: 'particular',
+    nombreCompleto: datosIniciales?.nombreCompleto || '',
+    rut: datosIniciales?.rut || '',
+    correo: datosIniciales?.correo || '',
+    telefono: datosIniciales?.telefono || '',
+    direccionEntrega: datosIniciales?.direccionEntrega || '',
+    comuna: datosIniciales?.comuna || 'La Serena',
+    tipoCliente: datosIniciales?.tipoCliente || (datosIniciales?.rol?.toLowerCase().includes('contratista') ? 'contratista' : 'particular'),
     medioPago: 'webpay',
     observaciones: ''
   });
@@ -79,7 +80,7 @@ const FormularioCompra = ({
           })
         });
       }
-    }, 1200);
+    }, 400);
   };
 
   return (
@@ -219,7 +220,7 @@ const FormularioCompra = ({
           </Form.Group>
 
           <div className="d-flex flex-wrap gap-2 justify-content-end">
-            <div style={{ minWidth: '150px' }}>
+            <div className="ancho-minimo-180">
               <Boton
                 texto="Volver al Carrito"
                 variante="outline-secondary"
@@ -227,7 +228,7 @@ const FormularioCompra = ({
                 deshabilitado={procesando}
               />
             </div>
-            <div style={{ minWidth: '220px' }}>
+            <div className="ancho-minimo-220">
               <Boton
                 tipo="submit"
                 texto={procesando ? '⏳ Procesando Pedido...' : '✓ Confirmar y Finalizar Compra'}

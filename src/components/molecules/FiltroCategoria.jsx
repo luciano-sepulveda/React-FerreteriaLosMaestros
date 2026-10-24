@@ -1,31 +1,33 @@
-import React from 'react';
-import { CATEGORIAS } from '../../data/productos';
+import Boton from '../atoms/Boton';
 
-
-const FiltroCategoria = ({ categoriaSeleccionada, alSeleccionarCategoria, onSeleccionarCategoria }) => {
-  const manejadorSeleccion = alSeleccionarCategoria || onSeleccionarCategoria;
-
+const FiltroCategoria = ({
+  categoriaSeleccionada,
+  categorias = [],
+  alSeleccionarCategoria
+}) => {
   return (
     <div className="d-flex flex-wrap gap-2 mb-4">
-      <button
-        type="button"
-        className={`btn btn-sm ${!categoriaSeleccionada ? 'btn-dark fw-bold' : 'btn-outline-secondary'}`}
-        onClick={() => manejadorSeleccion && manejadorSeleccion('')}
-      >
-        Todas las categorías
-      </button>
+      <Boton
+        tipo="button"
+        variante={!categoriaSeleccionada ? 'dark' : 'outline-secondary'}
+        tamano="sm"
+        claseAdicional="w-auto px-3"
+        alHacerClic={() => alSeleccionarCategoria && alSeleccionarCategoria('')}
+        texto="Todas las categorías"
+      />
 
-      {CATEGORIAS.map((categoria) => {
+      {categorias.map((categoria) => {
         const estaActiva = categoriaSeleccionada === categoria;
         return (
-          <button
+          <Boton
             key={categoria}
-            type="button"
-            className={`btn btn-sm ${estaActiva ? 'btn-warning fw-bold text-dark' : 'btn-outline-secondary'}`}
-            onClick={() => manejadorSeleccion && manejadorSeleccion(categoria)}
-          >
-            {categoria}
-          </button>
+            tipo="button"
+            variante={estaActiva ? 'warning' : 'outline-secondary'}
+            tamano="sm"
+            claseAdicional={`w-auto px-3 ${estaActiva ? 'text-dark' : ''}`}
+            alHacerClic={() => alSeleccionarCategoria && alSeleccionarCategoria(categoria)}
+            texto={categoria}
+          />
         );
       })}
     </div>

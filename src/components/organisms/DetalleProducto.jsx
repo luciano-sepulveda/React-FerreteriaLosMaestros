@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Row, Col, Alert } from 'react-bootstrap';
 import FichaTecnica from '../molecules/FichaTecnica';
 import ControlCantidad from '../molecules/ControlCantidad';
 import Precio from '../atoms/Precio';
 import Boton from '../atoms/Boton';
-import Etiqueta from '../atoms/Etiqueta';
 
 const DetalleProducto = ({
   producto,
@@ -20,7 +19,7 @@ const DetalleProducto = ({
       <div className="bg-white p-5 rounded-4 shadow-sm text-center border">
         <h4 className="fw-bold text-dark mb-3">Producto no encontrado</h4>
         <p className="text-muted mb-4">El producto solicitado no existe o no tiene stock asignado.</p>
-        <div className="d-inline-block" style={{ maxWidth: '220px' }}>
+        <div className="d-inline-block ancho-maximo-220">
           <Boton texto="Volver al Catálogo" variante="warning" alHacerClic={alVolver} />
         </div>
       </div>
@@ -69,7 +68,7 @@ const DetalleProducto = ({
               variante="outline-light"
               tamano="sm"
               alHacerClic={alVolver}
-              claseAdicional="px-3"
+              claseAdicional="px-3 w-auto"
             />
           </div>
         </div>
@@ -84,7 +83,6 @@ const DetalleProducto = ({
 
         <Row className="g-4">
           <Col lg={7}>
-            {/* Descripción general */}
             <div className="mb-4">
               <h5 className="fw-bold text-dark border-bottom pb-2 mb-2">Descripción del Producto</h5>
               <p className="text-secondary lead fs-6">
@@ -92,10 +90,8 @@ const DetalleProducto = ({
               </p>
             </div>
 
-            {/* Molécula Ficha Técnica */}
             <FichaTecnica producto={producto} />
 
-            {/* Aviso Contratista */}
             <div className="p-3 bg-light rounded-3 border">
               <h6 className="fw-bold text-dark mb-1">🏗️ Disponibilidad y Despacho</h6>
               <ul className="list-unstyled small text-muted mb-0">
@@ -107,8 +103,7 @@ const DetalleProducto = ({
           </Col>
 
           <Col lg={5}>
-            {/* Tarjeta de compra y cotización */}
-            <div className="p-4 bg-light rounded-4 border shadow-sm sticky-top" style={{ top: '80px' }}>
+            <div className="p-4 bg-light rounded-4 border shadow-sm sticky-top tarjeta-producto-detalle-posicion">
               <span className="text-muted small d-block mb-1">Precio Unitario (IVA incluido)</span>
               <Precio valor={precioVenta} />
 
@@ -146,7 +141,7 @@ const DetalleProducto = ({
                   />
                 </div>
 
-                <small className="text-muted d-block text-center mt-3" style={{ fontSize: '0.75rem' }}>
+                <small className="text-muted d-block text-center mt-3 tarjeta-producto-detalle-pie">
                   Stock actualizado en tiempo real desde bodega central.
                 </small>
               </div>

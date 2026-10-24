@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Precio from '../atoms/Precio';
@@ -7,15 +7,13 @@ import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 import Descuento from '../atoms/Descuento';
 import ControlCantidad from './ControlCantidad';
+import { obtenerEstadoStock } from '../../utils/stockUtils';
 
 const TarjetaProducto = ({
   producto,
   alCotizar,
-  onCotizar,
   alAgregarAlCarrito,
-  alComprar,
-  alVerDetalle,
-  onVerDetalle
+  alVerDetalle
 }) => {
   const navegar = useNavigate();
   const [cantidad, setCantidad] = useState(1);
@@ -37,21 +35,20 @@ const TarjetaProducto = ({
     descripcion
   } = producto;
 
+  const estadoStock = obtenerEstadoStock(stock, stockMinimo);
   const sinStock = stock <= 0;
-  const manejadorCotizar = alCotizar || onCotizar;
-  const manejadorAgregar = alAgregarAlCarrito || alComprar;
 
   const manejarAgregarCarrito = () => {
-    if (manejadorAgregar && !sinStock) {
-      manejadorAgregar(producto, cantidad);
+    if (alAgregarAlCarrito && !sinStock) {
+      alAgregarAlCarrito(producto, cantidad);
       setAgregadoReciente(true);
       setTimeout(() => setAgregadoReciente(false), 1800);
     }
   };
 
   const manejarVer = () => {
-    if (alVerDetalle || onVerDetalle) {
-      (alVerDetalle || onVerDetalle)(producto);
+    if (alVerDetalle) {
+      alVerDetalle(producto);
     } else {
       navegar(`/producto/${id}`);
     }
@@ -64,20 +61,19 @@ const TarjetaProducto = ({
           <Etiqueta variante="light" claseAdicional="text-secondary border small">
             {codigo}
           </Etiqueta>
-          <Stock stock={stock} stockMinimo={stockMinimo} />
+          <Stock texto={estadoStock.texto} variante={estadoStock.variante} />
         </div>
 
         <span className="text-muted small mb-1">{categoria} · {marca}</span>
         <Card.Title
-          className="h6 fw-bold text-dark text-truncate cursor-pointer"
+          className="h6 fw-bold text-dark text-truncate cursor-puntero"
           title={nombre}
           onClick={manejarVer}
-          style={{ cursor: 'pointer' }}
         >
           {nombre}
         </Card.Title>
 
-        <Card.Text className="text-muted small flex-grow-1" style={{ minHeight: '38px' }}>
+        <Card.Text className="text-muted small flex-grow-1 tarjeta-producto-descripcion">
           {descripcion || `Unidad de venta: ${unidad}`}
         </Card.Text>
 
@@ -96,7 +92,6 @@ const TarjetaProducto = ({
           </div>
         </div>
 
-        {/* Control de cantidad para agregar/comprar */}
         {!sinStock && (
           <div className="d-flex justify-content-between align-items-center mb-2">
             <span className="text-muted small">Cantidad:</span>
@@ -109,7 +104,6 @@ const TarjetaProducto = ({
           </div>
         )}
 
-        {/* Acciones principales: Comprar/Agregar, Cotizar y Ver Detalle */}
         <div className="d-flex flex-column gap-2 mt-auto">
           <Boton
             texto={
@@ -128,7 +122,7 @@ const TarjetaProducto = ({
             <Boton
               texto="📄 Cotizar"
               variante="outline-dark"
-              alHacerClic={() => manejadorCotizar && manejadorCotizar(producto, cantidad)}
+              alHacerClic={() => alCotizar && alCotizar(producto, cantidad)}
             />
             <Boton
               texto="🔍 Ver"

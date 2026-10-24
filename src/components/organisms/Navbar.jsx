@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Navbar as BsNavbar, Container, Nav, Form, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useCarrito } from '../../hooks/useCarrito';
+import useCarrito from '../../hooks/useCarrito';
 import Etiqueta from '../atoms/Etiqueta';
 
 const Navbar = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Alert, Row, Col } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
@@ -15,7 +15,7 @@ const FormularioContacto = () => {
 
   const [errores, setErrores] = useState({});
   const [enviado, setEnviado] = useState(false);
-  const [cargando, setCargando] = useState(false);
+  const [esperandoRespuesta, setEsperandoRespuesta] = useState(false);
 
   const manejarCambio = (campo, valor) => {
     setDatos((prev) => ({ ...prev, [campo]: valor }));
@@ -46,9 +46,9 @@ const FormularioContacto = () => {
     e.preventDefault();
     if (!validar()) return;
 
-    setCargando(true);
+    setEsperandoRespuesta(true);
     setTimeout(() => {
-      setCargando(false);
+      setEsperandoRespuesta(false);
       setEnviado(true);
       setDatos({
         nombreCompleto: '',
@@ -136,9 +136,9 @@ const FormularioContacto = () => {
       <div className="mt-3">
         <Boton
           tipo="submit"
-          texto={cargando ? 'Enviando Mensaje...' : '✉️ Enviar Mensaje a Ventas'}
+          texto={esperandoRespuesta ? 'Enviando Mensaje...' : '✉️ Enviar Mensaje a Ventas'}
           variante="warning"
-          deshabilitado={cargando}
+          deshabilitado={esperandoRespuesta}
         />
       </div>
     </Form>

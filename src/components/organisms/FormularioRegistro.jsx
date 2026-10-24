@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Alert, Row, Col } from 'react-bootstrap';
+import { useState } from 'react';
+import { Form, Row, Col } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import {
@@ -22,8 +22,7 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
   });
 
   const [errores, setErrores] = useState({});
-  const [mensajeExito, setMensajeExito] = useState('');
-  const [cargando, setCargando] = useState(false);
+  const [esperando, setEsperando] = useState(false);
 
   const manejarCambio = (campo, valor) => {
     setDatos((prev) => ({ ...prev, [campo]: valor }));
@@ -67,13 +66,10 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
     evento.preventDefault();
     if (!validar()) return;
 
-    setCargando(true);
+    setEsperando(true);
     setTimeout(() => {
-      setCargando(false);
-      // Guardar usuario registrado en localStorage
-      const usuariosGuardados = JSON.parse(localStorage.getItem('ferreteria_usuarios') || '[]');
-      const nuevoUsuario = {
-        id: Date.now(),
+      setEsperando(false);
+      const datosParaRegistrar = {
         nombreCompleto: datos.nombreCompleto,
         rut: datos.rut,
         correo: datos.correo,
@@ -83,27 +79,15 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
         rol: datos.tipoCliente === 'contratista' ? 'Contratista' : 'Particular',
         fechaRegistro: new Date().toLocaleDateString('es-CL')
       };
-      usuariosGuardados.push(nuevoUsuario);
-      localStorage.setItem('ferreteria_usuarios', JSON.stringify(usuariosGuardados));
-      localStorage.setItem('usuario_activo', JSON.stringify(nuevoUsuario));
 
-      setMensajeExito('¡Cuenta creada con éxito! Iniciando sesión...');
-      setTimeout(() => {
-        if (alRegistrarExitoso) {
-          alRegistrarExitoso(nuevoUsuario);
-        }
-      }, 1200);
-    }, 800);
+      if (alRegistrarExitoso) {
+        alRegistrarExitoso(datosParaRegistrar);
+      }
+    }, 400);
   };
 
   return (
     <Form onSubmit={manejarEnvio} noValidate>
-      {mensajeExito && (
-        <Alert variant="success" className="py-2 small">
-          {mensajeExito}
-        </Alert>
-      )}
-
       <CampoFormulario
         etiqueta="Nombre y Apellidos *"
         marcador="Ej: Carlos Silva Gómez"
@@ -192,9 +176,9 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
       <div className="mt-4">
         <Boton
           tipo="submit"
-          texto={cargando ? 'Registrando...' : 'Crear Cuenta'}
+          texto={esperando ? 'Registrando...' : 'Crear Cuenta'}
           variante="warning"
-          deshabilitado={cargando}
+          deshabilitado={esperando}
         />
       </div>
 
@@ -202,13 +186,14 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
         <div className="text-center mt-3 border-top pt-3">
           <small className="text-muted">
             ¿Ya tienes cuenta?{' '}
-            <button
-              type="button"
-              className="btn btn-link btn-sm p-0 fw-bold text-dark text-decoration-none"
-              onClick={alIrALogin}
-            >
-              Iniciar Sesión aquí
-            </button>
+            <Boton
+              tipo="button"
+              variante="link"
+              tamano="sm"
+              claseAdicional="p-0 fw-bold text-dark text-decoration-none d-inline w-auto"
+              alHacerClic={alIrALogin}
+              texto="Iniciar Sesión aquí"
+            />
           </small>
         </div>
       )}

@@ -1,24 +1,28 @@
-import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import TarjetaLogin from '../components/organisms/TarjetaLogin';
 import useTituloPagina from '../hooks/useTituloPagina';
-
+import useSesion from '../hooks/useSesion';
+import { obtenerUsuarioPorCorreo } from '../services/usuarioService';
 
 const Login = () => {
   useTituloPagina('Iniciar Sesión');
   const navegar = useNavigate();
+  const { iniciarSesion } = useSesion();
 
   const manejarLoginExitoso = (datosUsuario) => {
-
     const correoUsuario = datosUsuario.correo || datosUsuario.email;
-    const usuarioActivo = {
-      correo: correoUsuario,
-      rol: correoUsuario.includes('admin') ? 'Administrador' : 'Contratista'
-    };
+    const usuarioEncontrado = obtenerUsuarioPorCorreo(correoUsuario);
 
-    localStorage.setItem('usuario_activo', JSON.stringify(usuarioActivo));
-
+    if (usuarioEncontrado) {
+      iniciarSesion(usuarioEncontrado);
+    } else {
+      const usuarioActivo = {
+        correo: correoUsuario,
+        rol: correoUsuario.includes('admin') ? 'Administrador Bodega' : 'Contratista'
+      };
+      iniciarSesion(usuarioActivo);
+    }
 
     setTimeout(() => {
       navegar('/catalogo');

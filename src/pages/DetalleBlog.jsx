@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Card, Breadcrumb } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { articulosBlog } from '../data/articulosBlog';

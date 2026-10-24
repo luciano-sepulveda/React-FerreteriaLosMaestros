@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Table, Row, Col } from 'react-bootstrap';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
@@ -7,7 +6,8 @@ import { formatearPrecio } from '../../utils/formatearPrecio';
 
 const ComprobanteCompra = ({
   orden,
-  alVolverAlCatalogo
+  alVolverAlCatalogo,
+  textoVolver = '← Volver al Catálogo'
 }) => {
   if (!orden) return null;
 
@@ -43,7 +43,6 @@ const ComprobanteCompra = ({
       </Card.Header>
 
       <Card.Body className="p-4">
-        {/* Banner de confirmación */}
         <div className={`p-3 rounded-3 mb-4 text-center ${esCotizacion ? 'bg-light text-dark border' : 'bg-success bg-opacity-10 text-success border border-success'}`}>
           <h5 className="fw-bold mb-1">
             {esCotizacion ? '📄 Cotización Generada con Éxito' : '🎉 ¡Gracias por tu compra! Tu pedido ha sido registrado'}
@@ -55,7 +54,6 @@ const ComprobanteCompra = ({
           </p>
         </div>
 
-        {/* Resumen del Cliente y Entrega */}
         <Row className="mb-4 g-3">
           <Col md={6}>
             <div className="p-3 bg-light rounded-3 h-100 border">
@@ -91,7 +89,6 @@ const ComprobanteCompra = ({
           </Col>
         </Row>
 
-        {/* Tabla de Artículos */}
         <h6 className="fw-bold text-dark mb-2">Detalle de Productos</h6>
         <div className="table-responsive mb-3">
           <Table bordered hover className="align-middle small">
@@ -106,18 +103,20 @@ const ComprobanteCompra = ({
             </thead>
             <tbody>
               {orden.items && orden.items.map((item) => (
-                <tr key={item.producto.id}>
+                <tr key={item.producto?.id || item.codigo}>
                   <td>
                     <Etiqueta variante="light" claseAdicional="border">
-                      {item.producto.codigo}
+                      {item.producto?.codigo || item.codigo}
                     </Etiqueta>
                   </td>
                   <td>
-                    <strong>{item.producto.nombre}</strong>
-                    <span className="d-block text-muted">{item.producto.marca} · {item.producto.categoria}</span>
+                    <strong>{item.producto?.nombre || item.nombre}</strong>
+                    <span className="d-block text-muted">
+                      {item.producto?.marca || ''} · {item.producto?.categoria || ''}
+                    </span>
                   </td>
                   <td className="text-center fw-bold">{item.cantidad}</td>
-                  <td className="text-end">{formatearPrecio(item.producto.precioVenta)}</td>
+                  <td className="text-end">{formatearPrecio(item.producto?.precioVenta || item.precioVenta || 0)}</td>
                   <td className="text-end fw-bold text-dark">{formatearPrecio(item.subtotal)}</td>
                 </tr>
               ))}
@@ -125,7 +124,6 @@ const ComprobanteCompra = ({
           </Table>
         </div>
 
-        {/* Totales Financieros */}
         <div className="row justify-content-end mb-4">
           <div className="col-md-6 col-lg-5">
             <div className="p-3 bg-light rounded-3 border">
@@ -139,9 +137,8 @@ const ComprobanteCompra = ({
           </div>
         </div>
 
-        {/* Botones de acción */}
         <div className="d-flex flex-wrap gap-2 justify-content-between pt-3 border-top">
-          <div style={{ minWidth: '180px' }}>
+          <div className="ancho-minimo-180">
             <Boton
               texto="🖨️ Imprimir / Guardar PDF"
               variante="outline-dark"
@@ -150,9 +147,9 @@ const ComprobanteCompra = ({
             />
           </div>
 
-          <div style={{ minWidth: '220px' }}>
+          <div className="ancho-minimo-220">
             <Boton
-              texto="← Volver al Catálogo"
+              texto={textoVolver}
               variante="warning"
               alHacerClic={alVolverAlCatalogo}
               claseAdicional="px-4"

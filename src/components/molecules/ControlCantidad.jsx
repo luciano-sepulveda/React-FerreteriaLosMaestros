@@ -1,4 +1,3 @@
-import React from 'react';
 import Boton from '../atoms/Boton';
 import CampoNumero from '../atoms/CampoNumero';
 

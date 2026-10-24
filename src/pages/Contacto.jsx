@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import FormularioContacto from '../components/organisms/FormularioContacto';
 import useTituloPagina from '../hooks/useTituloPagina';

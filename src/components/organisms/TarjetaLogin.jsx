@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 import FormularioLogin from './FormularioLogin';
 import FormularioRegistro from './FormularioRegistro';
 
 const TarjetaLogin = ({
   alLoginExitoso,
-  onLoginExitoso,
   modoInicial = 'login'
 }) => {
   const [modo, setModo] = useState(modoInicial);
-  const manejadorExito = alLoginExitoso || onLoginExitoso;
 
   return (
     <Card className="shadow-sm p-3 p-md-4 rounded-4 border-0 bg-white">
@@ -26,14 +24,12 @@ const TarjetaLogin = ({
           </p>
         </div>
 
-        {/* Pestañas para alternar entre Iniciar Sesión y Registro */}
         <Nav variant="pills" justify className="mb-4 bg-light p-1 rounded-3">
           <Nav.Item>
             <Nav.Link
               active={modo === 'login'}
               onClick={() => setModo('login')}
-              className={`fw-semibold ${modo === 'login' ? 'bg-warning text-dark' : 'text-muted'}`}
-              style={{ cursor: 'pointer' }}
+              className={`fw-semibold ${modo === 'login' ? 'bg-warning text-dark' : 'text-muted'} cursor-puntero`}
             >
               Iniciar Sesión
             </Nav.Link>
@@ -42,8 +38,7 @@ const TarjetaLogin = ({
             <Nav.Link
               active={modo === 'registro'}
               onClick={() => setModo('registro')}
-              className={`fw-semibold ${modo === 'registro' ? 'bg-warning text-dark' : 'text-muted'}`}
-              style={{ cursor: 'pointer' }}
+              className={`fw-semibold ${modo === 'registro' ? 'bg-warning text-dark' : 'text-muted'} cursor-puntero`}
             >
               Crear Cuenta
             </Nav.Link>
@@ -52,12 +47,11 @@ const TarjetaLogin = ({
 
         {modo === 'login' ? (
           <FormularioLogin
-            alEnviar={manejadorExito}
-            alIrARegistro={() => setModo('registro')}
+            alEnviar={alLoginExitoso}
           />
         ) : (
           <FormularioRegistro
-            alRegistrarExitoso={manejadorExito}
+            alRegistrarExitoso={alLoginExitoso}
             alIrALogin={() => setModo('login')}
           />
         )}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
 const Precio = ({ valor }) => {

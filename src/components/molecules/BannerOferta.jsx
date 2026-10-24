@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';

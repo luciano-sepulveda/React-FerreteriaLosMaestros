@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, Alert, Badge } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BannerOferta from '../components/molecules/BannerOferta';
 import TarjetaProducto from '../components/molecules/TarjetaProducto';
+import Boton from '../components/atoms/Boton';
 import { listarOfertas } from '../services/productoService';
 import useCarrito from '../hooks/useCarrito';
 import useTituloPagina from '../hooks/useTituloPagina';
 
 const Ofertas = () => {
   useTituloPagina('Ofertas y Remates - Ferretería Los Maestros');
+  const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productosEnOferta, setProductosEnOferta] = useState([]);
+  const [productosEnOferta, setProductosEnOferta] = useState(() => listarOfertas());
   const [alerta, setAlerta] = useState('');
 
-  useEffect(() => {
-    const ofertas = listarOfertas();
-    setProductosEnOferta(ofertas);
-  }, []);
 
   const manejarAgregarCarrito = (producto, cantidad = 1) => {
     agregarAlCarrito(producto, cantidad);
@@ -30,7 +28,6 @@ const Ofertas = () => {
 
   return (
     <Container className="py-4">
-      {/* Banner de Oferta */}
       <BannerOferta
         titulo="Ofertas Especiales para Contratistas y Particulares"
         subtitulo="Precios rebajados por tiempo limitado en materiales esenciales, pinturas y herramientas profesionales."
@@ -47,9 +44,13 @@ const Ofertas = () => {
           <Badge bg="danger" className="px-3 py-2 fs-6">
             🔥 {productosEnOferta.length} ofertas activas
           </Badge>
-          <Link to="/carrito" className="btn btn-warning btn-sm fw-bold">
-            Ver Carrito y Totales →
-          </Link>
+          <Boton
+            variante="warning"
+            tamano="sm"
+            claseAdicional="w-auto px-3 fw-bold"
+            alHacerClic={() => navegar('/carrito')}
+            texto="Ver Carrito y Totales →"
+          />
         </div>
       </div>
 
@@ -62,9 +63,12 @@ const Ofertas = () => {
       {productosEnOferta.length === 0 ? (
         <div className="text-center py-5 bg-white rounded-4 shadow-sm border my-4">
           <p className="text-muted fs-5 mb-3">No hay productos en promoción en este momento.</p>
-          <Link to="/catalogo" className="btn btn-warning fw-bold">
-            Ver Catálogo General
-          </Link>
+          <Boton
+            variante="warning"
+            claseAdicional="w-auto px-4 fw-bold mx-auto"
+            alHacerClic={() => navegar('/catalogo')}
+            texto="Ver Catálogo General"
+          />
         </div>
       ) : (
         <Row className="g-4">

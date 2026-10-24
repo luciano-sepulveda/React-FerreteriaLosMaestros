@@ -1,5 +1,3 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
 export const FilaResumen = ({
@@ -21,7 +19,7 @@ export const FilaResumen = ({
           {etiqueta}
         </span>
         {textoSecundario && (
-          <small className="d-block text-muted" style={{ fontSize: '0.75rem' }}>
+          <small className="d-block text-muted texto-tamano-chico">
             {textoSecundario}
           </small>
         )}

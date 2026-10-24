@@ -1,14 +1,18 @@
-import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import TarjetaLogin from '../components/organisms/TarjetaLogin';
 import useTituloPagina from '../hooks/useTituloPagina';
+import useSesion from '../hooks/useSesion';
+import { crearUsuario } from '../services/usuarioService';
 
 const Registro = () => {
   useTituloPagina('Registro de Usuario - Ferretería Los Maestros');
   const navegar = useNavigate();
+  const { iniciarSesion } = useSesion();
 
-  const manejarExito = (usuario) => {
+  const manejarExito = (datosNuevoUsuario) => {
+    const usuarioCreado = crearUsuario(datosNuevoUsuario);
+    iniciarSesion(usuarioCreado);
     setTimeout(() => {
       navegar('/catalogo');
     }, 600);

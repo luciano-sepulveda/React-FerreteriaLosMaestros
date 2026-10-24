@@ -1,4 +1,3 @@
-import React from 'react';
 import Carrito from '../molecules/Carrito';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';

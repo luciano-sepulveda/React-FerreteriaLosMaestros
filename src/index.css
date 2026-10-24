@@ -1,6 +1,48 @@
-
-
 body {
   margin: 0;
 }
 
+.ancho-minimo-180 {
+  min-width: 180px;
+}
+
+.ancho-minimo-220 {
+  min-width: 220px;
+}
+
+.cursor-puntero {
+  cursor: pointer;
+}
+
+.tarjeta-categoria-efecto {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tarjeta-producto-descripcion {
+  min-height: 38px;
+}
+
+.tarjeta-producto-detalle-posicion {
+  top: 80px;
+}
+
+.tarjeta-producto-detalle-pie {
+  font-size: 0.75rem;
+}
+
+.texto-tamano-chico {
+  font-size: 0.75rem;
+}
+
+.ancho-maximo-320 {
+  max-width: 320px;
+}
+
+.ancho-maximo-220 {
+  max-width: 220px;
+}
+
+.ancho-maximo-800 {
+  max-width: 800px;
+}

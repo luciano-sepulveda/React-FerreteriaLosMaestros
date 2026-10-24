@@ -1,8 +1,8 @@
-import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Especificacion from '../atoms/Especificacion';
 import Stock from '../atoms/Stock';
 import Etiqueta from '../atoms/Etiqueta';
+import { obtenerEstadoStock } from '../../utils/stockUtils';
 
 const FichaTecnica = ({ producto }) => {
   if (!producto) return null;
@@ -17,6 +17,8 @@ const FichaTecnica = ({ producto }) => {
     stockMinimo
   } = producto;
 
+  const estadoStock = obtenerEstadoStock(stock, stockMinimo);
+
   return (
     <div className="p-3 bg-white rounded-3 border shadow-sm mb-3">
       <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
@@ -25,7 +27,7 @@ const FichaTecnica = ({ producto }) => {
           <Etiqueta variante="light" claseAdicional="border">
             {codigo}
           </Etiqueta>
-          <Stock stock={stock} stockMinimo={stockMinimo} />
+          <Stock texto={estadoStock.texto} variante={estadoStock.variante} />
         </div>
       </div>
 
