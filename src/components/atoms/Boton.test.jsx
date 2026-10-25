@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import Boton from './Boton';
 
 describe('Boton', () => {
-    it('ejecuta al Hacer Clic al hacer clic', async () => {
+    it('ejecuta alHacerClic al hacer clic', async () => {
         const alHacerClic = vi.fn();
         render(<Boton texto="Agregar" alHacerClic={alHacerClic} />);
 

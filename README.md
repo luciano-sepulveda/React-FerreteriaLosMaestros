@@ -151,3 +151,4 @@ https://drive.google.com/drive/folders/1Ohfo5ks348yBIH9QcuKaWfnINH91GmTV?usp=sha
 | 24/10/2026 | Luciano-Sepulveda | Panel de administración |
 | 24/10/2026 | Luciano-Sepulveda | Limpieza |
 | 24/10/2026 | Luciano-Sepulveda | Corrección de errores de lint |
+            | 25/10/2026 | Luciano-Sepulveda | Pruebas unitarias |

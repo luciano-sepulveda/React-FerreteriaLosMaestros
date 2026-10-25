@@ -10,7 +10,7 @@ describe('productoService', () => {
         localStorage.clear();
     });
 
-    it('actualizar Producto cambia el stock y queda guardado', () => {
+    it('actualizarProducto cambia el stock y queda guardado', () => {
         actualizarProducto(1, { stock: 5 });
 
         expect(obtenerProducto(1).stock).toBe(5);
