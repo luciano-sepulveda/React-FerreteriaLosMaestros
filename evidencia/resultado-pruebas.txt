@@ -1,0 +1,71 @@
+
+> ferreterialosmaestros2react@0.0.0 test:run
+> vitest run --reporter=verbose
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.5 [39m[90m/home/ubuntu/FerreteriaLosMaestrosReact[39m
+
+ [32m✓[39m src/context/Carrito.test.jsx[2m > [22mCarritoProvider[2m > [22mcalcula el neto y el IVA a partir del total[32m 24[2mms[22m[39m
+ [31m×[39m src/context/Carrito.test.jsx[2m > [22mCarritoProvider[2m > [22mno agrega al carrito un producto sin stock[32m 15[2mms[22m[39m
+[31m   → expected [ { producto: { id: 2, …(3) }, …(2) } ] to have a length of +0 but got 1[39m
+ [32m✓[39m src/services/pedidoService.test.js[2m > [22mcrearPedido[2m > [22mlanza un error si el pedido no tiene ítems[32m 4[2mms[22m[39m
+ [31m×[39m src/services/pedidoService.test.js[2m > [22mcrearPedido[2m > [22mdescuenta del stock la cantidad comprada[32m 9[2mms[22m[39m
+[31m   → expected 80 to be 78 // Object.is equality[39m
+ [32m✓[39m src/components/organisms/FormularioLogin.test.jsx[2m > [22mFormularioLogin[2m > [22mmuestra los errores de validación al enviar el formulario vacío[32m 269[2mms[22m[39m
+ [32m✓[39m src/components/atoms/Boton.test.jsx[2m > [22mBoton[2m > [22mejecuta al Hacer Clic al hacer clic[32m 205[2mms[22m[39m
+ [32m✓[39m src/components/molecules/ControlCantidad.test.jsx[2m > [22mControlCantidad[2m > [22mdeshabilita el botón + al llegar al stock máximo[32m 200[2mms[22m[39m
+ [32m✓[39m src/utils/stockUtils.test.js[2m > [22mobtenerEstadoStock[2m > [22mpide reponer con variante warning y requiereAlerta true cuando el stock está bajo el mínimo[32m 2[2mms[22m[39m
+ [32m✓[39m src/services/productoService.test.js[2m > [22mproductoService[2m > [22mactualizar Producto cambia el stock y queda guardado[32m 3[2mms[22m[39m
+ [32m✓[39m src/utils/validaciones.test.js[2m > [22mvalidarCorreo[2m > [22mrechaza un correo sin arroba[32m 3[2mms[22m[39m
+ [32m✓[39m src/humo.test.js[2m > [22mfunciona[32m 2[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/context/Carrito.test.jsx[2m > [22mCarritoProvider[2m > [22mno agrega al carrito un producto sin stock
+[31m[1mAssertionError[22m: expected [ { producto: { id: 2, …(3) }, …(2) } ] to have a length of +0 but got 1[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 0[39m
+[31m+ 1[39m
+
+[36m [2m❯[22m src/context/Carrito.test.jsx:[2m36:49[22m[39m
+    [90m 34|[39m         });
+    [90m 35|[39m
+    [90m 36|[39m         expect(result.current.elementosCarrito).toHaveLength(0);
+    [90m   |[39m                                                 [31m^[39m
+    [90m 37|[39m     });
+    [90m 38|[39m });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/services/pedidoService.test.js[2m > [22mcrearPedido[2m > [22mdescuenta del stock la cantidad comprada
+[31m[1mAssertionError[22m: expected 80 to be 78 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 78[39m
+[31m+ 80[39m
+
+[36m [2m❯[22m src/services/pedidoService.test.js:[2m31:42[22m[39m
+    [90m 29|[39m         crearPedido(pedido);
+    [90m 30|[39m
+    [90m 31|[39m         expect(obtenerProducto(1).stock).toBe(stockAntes - 2);
+    [90m   |[39m                                          [31m^[39m
+    [90m 32|[39m     });
+    [90m 33|[39m });
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (9)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (11)[39m
+[2m   Start at [22m 20:07:53
+[2m   Duration [22m 11.76s[2m (environment 75%, import 9%, tests 7%, setup 7%, worker 1%, transform 1%)[22m
+
+[2mEnvironment [22m [33mjsdom was created 9 times[39m[2m · 7.70s total, 75% of tracked time[22m
+[2m            [22m [2mcreate it once per worker with [22m[33mpool: 'vmThreads'[39m[2m (keeps per-file isolation) or [22m[33misolate: false[39m[2m (shares it across files)[22m
+[2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#test-environments[22m
+
