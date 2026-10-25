@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
-
-export const CarritoContext = createContext();
+import { useState, useEffect } from 'react';
+import { CarritoContext } from './CarritoContexto';
 
 const CLAVE_ALMACENAMIENTO = 'ferreteria_los_maestros_carrito';
 
@@ -9,7 +8,7 @@ export const CarritoProvider = ({ children }) => {
     try {
       const guardado = localStorage.getItem(CLAVE_ALMACENAMIENTO);
       return guardado ? JSON.parse(guardado) : [];
-    } catch (e) {
+    } catch {
       return [];
     }
   });
@@ -17,7 +16,8 @@ export const CarritoProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem(CLAVE_ALMACENAMIENTO, JSON.stringify(elementosCarrito));
-    } catch (e) {
+    } catch {
+      return;
     }
   }, [elementosCarrito]);
 

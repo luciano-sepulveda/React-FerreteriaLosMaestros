@@ -105,7 +105,9 @@ src/
 │   └── usuarioService.js
 ├── context/
 │   ├── Carrito.jsx
-│   └── Sesion.jsx
+│   ├── CarritoContexto.js
+│   ├── Sesion.jsx
+│   └── SesionContexto.js
 ├── hooks/
 │   ├── useCarrito.js
 │   ├── useSesion.js
@@ -148,3 +150,4 @@ https://drive.google.com/drive/folders/1Ohfo5ks348yBIH9QcuKaWfnINH91GmTV?usp=sha
 | 24/10/2026 | Luciano-Sepulveda | Sesión y usuarios |
 | 24/10/2026 | Luciano-Sepulveda | Panel de administración |
 | 24/10/2026 | Luciano-Sepulveda | Limpieza |
+| 24/10/2026 | Luciano-Sepulveda | Corrección de errores de lint |

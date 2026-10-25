@@ -1,6 +1,5 @@
-import { createContext, useState, useContext } from 'react';
-
-export const SesionContext = createContext();
+import { useState } from 'react';
+import { SesionContext } from './SesionContexto';
 
 const CLAVE_USUARIO_ACTIVO = 'usuario_activo';
 
@@ -44,13 +43,3 @@ export const SesionProvider = ({ children }) => {
     </SesionContext.Provider>
   );
 };
-
-export const useSesion = () => {
-  const contexto = useContext(SesionContext);
-  if (!contexto) {
-    throw new Error('useSesion debe ser utilizado dentro de un SesionProvider');
-  }
-  return contexto;
-};
-
-export default SesionContext;

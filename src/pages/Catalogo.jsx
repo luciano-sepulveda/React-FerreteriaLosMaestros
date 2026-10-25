@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, Alert, Badge } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import TarjetaProducto from '../components/molecules/TarjetaProducto';
@@ -14,14 +14,9 @@ const Catalogo = () => {
   const parametros = useParams();
   const navegar = useNavigate();
   const { agregarAlCarrito } = useCarrito();
-  const [productos, setProductos] = useState(() => listarProductos());
-  const [categorias, setCategorias] = useState(() => listarCategorias());
+  const productos = listarProductos();
+  const categorias = listarCategorias();
   const [mensajeNotificacion, setMensajeNotificacion] = useState('');
-
-  useEffect(() => {
-    setProductos(listarProductos());
-    setCategorias(listarCategorias());
-  }, []);
 
   let productosVisibles = productos;
   let titulo = 'Catálogo Completo';

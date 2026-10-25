@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Tab, Nav, Alert } from 'react-bootstrap';
 import {
   listarProductos,
@@ -44,11 +44,11 @@ import PerfilAdministrador from '../components/organisms/PerfilAdministrador';
 const Administracion = () => {
   useTituloPagina('Panel de Administración - Ferretería Los Maestros');
 
-  const [productos, setProductos] = useState([]);
-  const [criticos, setCriticos] = useState([]);
-  const [solicitudes, setSolicitudes] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const [productos, setProductos] = useState(() => listarProductos());
+  const [criticos, setCriticos] = useState(() => listarCriticos());
+  const [solicitudes, setSolicitudes] = useState(() => listarPedidos());
+  const [usuarios, setUsuarios] = useState(() => listarUsuarios());
+  const [categorias, setCategorias] = useState(() => listarCategorias());
   const [pestanaActiva, setPestanaActiva] = useState('dashboard');
 
   const [productoEditando, setProductoEditando] = useState(null);
@@ -73,10 +73,6 @@ const Administracion = () => {
     setSolicitudes(listarPedidos());
     setCategorias(listarCategorias());
   };
-
-  useEffect(() => {
-    cargarDatos();
-  }, []);
 
   const mostrarAlerta = (tipo, texto) => {
     setMensaje({ tipo, texto });
