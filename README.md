@@ -7,7 +7,7 @@ Ferretería Los Maestros Con React
 | Nombre completo | Correo institucional |
 | --- | --- |
 | Luciano Sepulveda Valdes | luci.sepulveda@duocuc.cl |
-| Sergio Peralta | serg.peralta@duocuc.cl |
+
 
 ## Caso
 
@@ -137,18 +137,18 @@ npm install
 npm run dev
 ```
 
-## Material complementario
+## Material complementario ERS2
 
-https://drive.google.com/drive/folders/1Ohfo5ks348yBIH9QcuKaWfnINH91GmTV?usp=sharing
+https://docs.google.com/document/d/1Gh91Q_U7tulzz5iQi-vL2zBv6b06waYbvyVzYlDONYM/edit?tab=t.0
 
 ## Bitácora
 
-| Fecha | Integrante | Trabajo |
-| --- | --- | --- |
-| 24/10/2026 | Luciano-Sepulveda | Pedidos |
-| 24/10/2026 | Luciano-Sepulveda | Pantalla de error |
-| 24/10/2026 | Luciano-Sepulveda | Sesión y usuarios |
-| 24/10/2026 | Luciano-Sepulveda | Panel de administración |
-| 24/10/2026 | Luciano-Sepulveda | Limpieza |
-| 24/10/2026 | Luciano-Sepulveda | Corrección de errores de lint |
-            | 25/10/2026 | Luciano-Sepulveda | Pruebas unitarias |
+| Integrante | Trabajo |
+
+Luciano-Sepulveda | Pedidos |
+Luciano-Sepulveda | Pantalla de error |
+Luciano-Sepulveda | Sesión y usuarios |
+Luciano-Sepulveda | Panel de administración |
+Luciano-Sepulveda | Limpieza |
+Luciano-Sepulveda | Corrección de errores de lint |
+Luciano-Sepulveda | Pruebas unitarias |

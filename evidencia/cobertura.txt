@@ -6,23 +6,22 @@
 [1m[30m[46m RUN [49m[39m[22m [36mv5.0.5 [39m[90m/home/ubuntu/FerreteriaLosMaestrosReact[39m
       [2mCoverage enabled with [22m[33mv8[39m
 
- [31m❯[39m src/context/Carrito.test.jsx [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 52[2mms[22m[39m
+ [31m❯[39m src/context/Carrito.test.jsx [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 48[2mms[22m[39m
    [31m❯[39m CarritoProvider [2m(2)[22m
-     [32m✓[39m calcula el neto y el IVA a partir del total[32m 30[2mms[22m[39m
-[31m     [31m×[31m no agrega al carrito un producto sin stock[39m[32m 17[2mms[22m[39m
- [31m❯[39m src/services/pedidoService.test.js [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 19[2mms[22m[39m
+     [32m✓[39m calcula el neto y el IVA a partir del total[32m 28[2mms[22m[39m
+[31m     [31m×[31m no agrega al carrito un producto sin stock[39m[32m 16[2mms[22m[39m
+ [31m❯[39m src/services/pedidoService.test.js [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 18[2mms[22m[39m
    [31m❯[39m crearPedido [2m(2)[22m
-     [32m✓[39m lanza un error si el pedido no tiene ítems[32m 5[2mms[22m[39m
+     [32m✓[39m lanza un error si el pedido no tiene ítems[32m 4[2mms[22m[39m
 [31m     [31m×[31m descuenta del stock la cantidad comprada[39m[32m 11[2mms[22m[39m
- [32m✓[39m src/components/organisms/FormularioLogin.test.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 316[2mms[22m[39m
+ [32m✓[39m src/components/organisms/FormularioLogin.test.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 332[2mms[22m[39m
    [32m✓[39m FormularioLogin [2m(1)[22m
-     [33m[2m✓[22m[39m muestra los errores de validación al enviar el formulario vacío[33m 309[2mms[22m[39m
- [32m✓[39m src/components/atoms/Boton.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 267[2mms[22m[39m
- [32m✓[39m src/components/molecules/ControlCantidad.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 277[2mms[22m[39m
+     [33m[2m✓[22m[39m muestra los errores de validación al enviar el formulario vacío[33m 324[2mms[22m[39m
+ [32m✓[39m src/components/atoms/Boton.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 266[2mms[22m[39m
+ [32m✓[39m src/components/molecules/ControlCantidad.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 274[2mms[22m[39m
  [32m✓[39m src/services/productoService.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m src/utils/validaciones.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m src/humo.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
- [32m✓[39m src/utils/stockUtils.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/utils/validaciones.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/utils/stockUtils.test.js [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
 
 [31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
 
@@ -65,12 +64,12 @@
 [31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
 
 
-[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (9)[39m
-[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (11)[39m
-[2m   Start at [22m 20:08:06
-[2m   Duration [22m 14.15s[2m (environment 66%, import 10%, setup 9%, tests 8%, worker 5%, transform 3%)[22m
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m6 passed[39m[22m[90m (8)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m8 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 20:38:33
+[2m   Duration [22m 12.78s[2m (environment 67%, import 10%, tests 9%, setup 8%, worker 5%, transform 1%)[22m
 
-[2mEnvironment [22m [33mjsdom was created 9 times[39m[2m · 7.55s total, 66% of tracked time[22m
+[2mEnvironment [22m [33mjsdom was created 8 times[39m[2m · 6.95s total, 67% of tracked time[22m
 [2m            [22m [2mcreate it once per worker with [22m[33mpool: 'vmThreads'[39m[2m (keeps per-file isolation) or [22m[33misolate: false[39m[2m (shares it across files)[22m
 [2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#test-environments[22m
 
