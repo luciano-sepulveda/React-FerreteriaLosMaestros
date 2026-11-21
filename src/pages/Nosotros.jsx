@@ -63,21 +63,21 @@ const Nosotros = () => {
                 </Col>
                 <Col sm={6}>
                   <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-                    <div className="fs-1 mb-2">🚚</div>
+                    <div className="fs-1 mb-2"></div>
                     <h5 className="fw-bold text-dark">Despacho Rápido</h5>
                     <p className="small text-muted mb-0">Entregas en faena dentro de 24 horas hábiles dentro del rango.</p>
                   </Card>
                 </Col>
                 <Col sm={6}>
                   <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-                    <div className="fs-1 mb-2">🤝</div>
+                    <div className="fs-1 mb-2"></div>
                     <h5 className="fw-bold text-dark">Crédito a 30 Días</h5>
                     <p className="small text-muted mb-0">Cuentas corrientes para contratistas calificados.</p>
                   </Card>
                 </Col>
                 <Col sm={6}>
                   <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-                    <div className="fs-1 mb-2">📦</div>
+                    <div className="fs-1 mb-2"></div>
                     <h5 className="fw-bold text-dark">Stock Real</h5>
                     <p className="small text-muted mb-0">Sincronización continua de inventario para evitar quiebres.</p>
                   </Card>

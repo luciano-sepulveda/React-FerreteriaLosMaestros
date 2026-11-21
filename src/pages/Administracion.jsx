@@ -205,27 +205,27 @@ const Administracion = () => {
         <Nav variant="tabs" className="mb-4">
           <Nav.Item>
             <Nav.Link eventKey="dashboard" className="fw-semibold text-dark">
-              📊 Dashboard
+               Dashboard
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="catalogo" className="fw-semibold text-dark">
-              📦 Catálogo ({productos.length})
+               Catálogo ({productos.length})
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="criticos" className="fw-semibold text-danger">
-              ⚠️ Ítems críticos ({criticos.length})
+               Ítems críticos ({criticos.length})
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="solicitudes" className="fw-semibold text-dark">
-              📄 Solicitudes ({solicitudes.length})
+               Solicitudes ({solicitudes.length})
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="categorias" className="fw-semibold text-dark">
-              🏷️ Categorías ({categorias.length})
+               Categorías ({categorias.length})
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -235,12 +235,12 @@ const Administracion = () => {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="reportes" className="fw-semibold text-dark">
-              📈 Reportes
+               Reportes
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="perfil" className="fw-semibold text-dark">
-              👤 Perfil
+               Perfil
             </Nav.Link>
           </Nav.Item>
         </Nav>

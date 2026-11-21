@@ -8,7 +8,7 @@ const Footer = () => {
         <Row className="g-4 mb-3 text-center text-md-start">
           <Col md={5}>
             <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
-              <span className="fs-4">🔨</span>
+              <span className="fs-4"></span>
               <span className="fw-bold fs-5 text-warning">Ferretería Los Maestros</span>
             </div>
             <p className="small text-light opacity-75 mb-0">
@@ -30,13 +30,13 @@ const Footer = () => {
           <Col md={4}>
             <h6 className="fw-bold text-warning mb-2">Casa Matriz</h6>
             <p className="small text-light opacity-75 mb-1">
-              📍 Mendelssohn 142 , La Serena · Chile
+               Mendelssohn 142 , La Serena · Chile
             </p>
             <p className="small text-light opacity-75 mb-1">
-              📞 +56 51 222 3344 · WhatsApp: +56 9 7654 3210
+               +56 51 222 3344 · WhatsApp: +56 9 7654 3210
             </p>
             <p className="small text-light opacity-75 mb-0">
-              🕒 Lun a Vie: 08:00 a 18:30 hrs · Sáb: 08:30 a 14:00 hrs
+               Lun a Vie: 08:00 a 18:30 hrs · Sáb: 08:30 a 14:00 hrs
             </p>
           </Col>
         </Row>

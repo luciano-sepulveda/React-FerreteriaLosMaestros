@@ -107,7 +107,7 @@ const Catalogo = () => {
 
       {productosConStockBajo.length > 0 && (
         <Alert variant="warning" className="py-2 small d-flex align-items-center">
-          <span className="me-2 fs-5">⚠️</span>
+          <span className="me-2 fs-5"></span>
           <span>
             <strong>Atención bodeguero / ventas:</strong> Hay <strong>{productosConStockBajo.length}</strong> producto(s) en esta lista con stock igual o menor al mínimo (requiere reposición).
           </span>

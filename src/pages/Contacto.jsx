@@ -20,7 +20,7 @@ const Contacto = () => {
       <Row className="g-4 mb-5">
         <Col md={4}>
           <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-            <div className="fs-1 mb-2">📍</div>
+            <div className="fs-1 mb-2"></div>
             <h5 className="fw-bold text-dark">Sucursal Principal</h5>
             <p className="small text-muted mb-1">Av. Balmaceda 1420, La Serena</p>
             <small className="text-secondary">Región de Coquimbo, Chile</small>
@@ -29,7 +29,7 @@ const Contacto = () => {
 
         <Col md={4}>
           <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-            <div className="fs-1 mb-2">📞</div>
+            <div className="fs-1 mb-2"></div>
             <h5 className="fw-bold text-dark">Teléfonos y WhatsApp</h5>
             <p className="small text-muted mb-1">Mesa Central: +56 51 222 3344</p>
             <small className="text-success fw-bold">WhatsApp Faenas: +56 9 7654 3210</small>
@@ -38,7 +38,7 @@ const Contacto = () => {
 
         <Col md={4}>
           <Card className="p-3 bg-light border-0 rounded-4 shadow-sm h-100 text-center">
-            <div className="fs-1 mb-2">🕒</div>
+            <div className="fs-1 mb-2"></div>
             <h5 className="fw-bold text-dark">Horario de Atención</h5>
             <p className="small text-muted mb-1">Lun - Vie: 08:00 a 18:30 hrs</p>
             <small className="text-secondary">Sábados: 08:30 a 14:00 hrs (Continuado)</small>
@@ -60,14 +60,14 @@ const Contacto = () => {
               </p>
 
               <div className="p-3 bg-secondary bg-opacity-25 rounded-3 mb-3">
-                <span className="fw-bold d-block text-warning small mb-1">📦 Retiro en Tienda Express:</span>
+                <span className="fw-bold d-block text-warning small mb-1"> Retiro en Tienda Express:</span>
                 <small className="text-light opacity-75">
                   Haz tu pedido online y recógelo listo y embalado en mesón en menos de 45 minutos.
                 </small>
               </div>
 
               <div className="p-3 bg-secondary bg-opacity-25 rounded-3">
-                <span className="fw-bold d-block text-warning small mb-1">🚚 Camión Grúa para Descarga:</span>
+                <span className="fw-bold d-block text-warning small mb-1"> Camión Grúa para Descarga:</span>
                 <small className="text-light opacity-75">
                   Contamos con camión grúa pluma para descargas de áridos, cemento y perfiles pesados en faena.
                 </small>

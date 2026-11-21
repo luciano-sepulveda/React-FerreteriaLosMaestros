@@ -66,8 +66,8 @@ const DetalleBlog = () => {
           </div>
           <h1 className="h2 fw-bold text-white mb-2">{titulo}</h1>
           <div className="d-flex flex-wrap gap-3 small text-light opacity-75">
-            <span>📅 {fecha}</span>
-            <span>✍️ {autor}</span>
+            <span> {fecha}</span>
+            <span> {autor}</span>
           </div>
         </Card.Header>
 

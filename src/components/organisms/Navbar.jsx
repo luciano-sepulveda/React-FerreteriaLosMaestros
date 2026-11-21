@@ -23,7 +23,7 @@ const Navbar = () => {
     <BsNavbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="shadow-sm sticky-top border-bottom border-warning border-2">
       <Container>
         <BsNavbar.Brand as={NavLink} to="/" className="fw-bold text-warning fs-4 d-flex align-items-center gap-2">
-          <span>🔨</span>
+          <span></span>
           <span>Ferretería Los Maestros</span>
         </BsNavbar.Brand>
 
@@ -38,7 +38,7 @@ const Navbar = () => {
               Catálogo
             </Nav.Link>
             <Nav.Link as={NavLink} to="/ofertas" className="fw-semibold text-warning">
-              🔥 Ofertas
+               Ofertas
             </Nav.Link>
             <Nav.Link as={NavLink} to="/nosotros" className="fw-semibold">
               Nosotros
@@ -76,7 +76,7 @@ const Navbar = () => {
               size="sm"
               className="fw-bold d-flex align-items-center gap-1"
             >
-              <span>🛒</span>
+              <span></span>
               <span>Carrito</span>
               {cantidadTotalArticulos > 0 && (
                 <Etiqueta variante="warning" esPildora={true} claseAdicional="text-dark ms-1">
@@ -93,7 +93,7 @@ const Navbar = () => {
               className="fw-semibold px-2"
               title="Panel de Administración de Bodega"
             >
-              ⚙️ Admin
+               Admin
             </Button>
 
             <Button

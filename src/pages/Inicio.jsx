@@ -59,7 +59,7 @@ const Inicio = () => {
             </Col>
             <Col lg={4} className="text-center">
               <Card className="bg-secondary bg-opacity-25 border-warning text-white p-4 rounded-4 shadow">
-                <div className="fs-1 mb-2">🏗️</div>
+                <div className="fs-1 mb-2"></div>
                 <h4 className="fw-bold text-warning">Beneficios Contratistas</h4>
                 <ul className="list-unstyled text-start small mt-3 mb-0">
                   <li className="mb-2">✓ Cuenta corriente y pago a 30 días</li>
@@ -88,7 +88,7 @@ const Inicio = () => {
                   onClick={() => navegar(`/categoria/${encodeURIComponent(categoriaItem)}`)}
                 >
                   <div className="fs-2 mb-2">
-                    {indice % 9 === 0 ? '🧱' : indice % 9 === 1 ? '🎨' : indice % 9 === 2 ? '🔨' : indice % 9 === 3 ? '🚰' : indice % 9 === 4 ? '⚡' : indice % 9 === 5 ? '🔩' : indice % 9 === 6 ? '🪵' : indice % 9 === 7 ? '🦺' : '🌱'}
+                    {indice % 9 === 0 ? '' : indice % 9 === 1 ? '' : indice % 9 === 2 ? '' : indice % 9 === 3 ? '' : indice % 9 === 4 ? '' : indice % 9 === 5 ? '' : indice % 9 === 6 ? '' : indice % 9 === 7 ? '' : ''}
                   </div>
                   <span className="fw-semibold small text-dark d-block">{categoriaItem}</span>
                 </Card>

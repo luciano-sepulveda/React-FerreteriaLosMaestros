@@ -13,7 +13,7 @@ function FilaCategoria(props) {
           tamano="sm"
           claseAdicional="py-1 px-2 w-auto"
           alHacerClic={() => props.alEditar && props.alEditar(props.categoria)}
-          texto="✏️ Editar"
+          texto=" Editar"
         />
       </td>
     </tr>

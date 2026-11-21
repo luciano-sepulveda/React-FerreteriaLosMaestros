@@ -18,7 +18,7 @@ const Ofertas = () => {
 
   const manejarAgregarCarrito = (producto, cantidad = 1) => {
     agregarAlCarrito(producto, cantidad);
-    setAlerta(`🛒 ¡Agregaste ${cantidad}x ${producto.nombre} con precio rebajado al carrito!`);
+    setAlerta(`¡Agregaste ${cantidad}x ${producto.nombre} con precio rebajado al carrito!`);
     setTimeout(() => setAlerta(''), 3500);
   };
 
@@ -42,7 +42,7 @@ const Ofertas = () => {
         </div>
         <div className="d-flex align-items-center gap-2">
           <Badge bg="danger" className="px-3 py-2 fs-6">
-            🔥 {productosEnOferta.length} ofertas activas
+            {productosEnOferta.length} ofertas activas
           </Badge>
           <Boton
             variante="warning"
