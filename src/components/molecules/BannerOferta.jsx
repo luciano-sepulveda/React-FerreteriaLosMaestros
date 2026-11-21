@@ -2,12 +2,11 @@ import { Card, Row, Col } from 'react-bootstrap';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const BannerOferta = ({
-  titulo = 'Gran Remate de Temporada',
-  subtitulo = 'Descuentos exclusivos en materiales para faena, herramientas eléctricas y suministros.',
-  textoBoton = 'Ver Promociones',
-  alHacerClic
-}) => {
+function BannerOferta(props) {
+  const titulo = props.titulo || 'Gran Remate de Temporada';
+  const subtitulo = props.subtitulo || 'Descuentos exclusivos en materiales para faena, herramientas eléctricas y suministros.';
+  const textoBoton = props.textoBoton || 'Ver Promociones';
+
   return (
     <Card className="border-0 bg-dark text-white shadow-sm rounded-4 overflow-hidden mb-4 border-start border-warning border-5">
       <Card.Body className="p-4">
@@ -28,13 +27,13 @@ const BannerOferta = ({
             </p>
           </Col>
 
-          {textoBoton && alHacerClic && (
+          {textoBoton && props.alHacerClic && (
             <Col md={4} className="text-md-end mt-3 mt-md-0">
               <div className="d-inline-block">
                 <Boton
                   texto={textoBoton}
                   variante="warning"
-                  alHacerClic={alHacerClic}
+                  alHacerClic={props.alHacerClic}
                   claseAdicional="px-4 py-2"
                 />
               </div>
@@ -44,6 +43,6 @@ const BannerOferta = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default BannerOferta;

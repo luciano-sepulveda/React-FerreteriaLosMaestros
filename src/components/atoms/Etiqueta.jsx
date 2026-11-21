@@ -1,21 +1,15 @@
 import { Badge } from 'react-bootstrap';
 
-const Etiqueta = ({
-  texto,
-  children,
-  variante = 'warning',
-  esPildora = false,
-  claseAdicional = ''
-}) => {
+function Etiqueta(props) {
   return (
     <Badge
-      bg={variante}
-      pill={esPildora}
-      className={`px-2 py-1 fw-semibold ${claseAdicional}`.trim()}
+      bg={props.variante || 'warning'}
+      pill={props.esPildora || false}
+      className={`px-2 py-1 fw-semibold ${props.claseAdicional || ''}`.trim()}
     >
-      {texto || children}
+      {props.texto || props.children}
     </Badge>
   );
-};
+}
 
 export default Etiqueta;

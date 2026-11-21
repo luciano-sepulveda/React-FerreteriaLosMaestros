@@ -4,25 +4,21 @@ import Stock from '../atoms/Stock';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 import { obtenerEstadoStock } from '../../utils/stockUtils';
 
-const FilaProducto = ({
-  producto,
-  alEditar,
-  alEliminar
-}) => {
-  const estadoStock = obtenerEstadoStock(producto.stock, producto.stockMinimo);
+function FilaProducto(props) {
+  const estadoStock = obtenerEstadoStock(props.producto.stock, props.producto.stockMinimo);
 
   return (
     <tr>
       <td>
-        <Etiqueta variante="light">{producto.codigo}</Etiqueta>
+        <Etiqueta variante="light">{props.producto.codigo}</Etiqueta>
       </td>
       <td>
-        <strong>{producto.nombre}</strong>
-        <span className="d-block text-muted texto-tamano-chico">{producto.unidad}</span>
+        <strong>{props.producto.nombre}</strong>
+        <span className="d-block text-muted texto-tamano-chico">{props.producto.unidad}</span>
       </td>
-      <td>{producto.categoria}</td>
-      <td>{producto.marca}</td>
-      <td className="text-end fw-semibold">{formatearPrecio(producto.precioVenta)}</td>
+      <td>{props.producto.categoria}</td>
+      <td>{props.producto.marca}</td>
+      <td className="text-end fw-semibold">{formatearPrecio(props.producto.precioVenta)}</td>
       <td className="text-center">
         <Stock texto={estadoStock.texto} variante={estadoStock.variante} />
       </td>
@@ -32,20 +28,20 @@ const FilaProducto = ({
             variante="outline-primary"
             tamano="sm"
             claseAdicional="py-1 px-2 w-auto"
-            alHacerClic={() => alEditar && alEditar(producto)}
+            alHacerClic={() => props.alEditar && props.alEditar(props.producto)}
             texto="✏️"
           />
           <Boton
             variante="outline-danger"
             tamano="sm"
             claseAdicional="py-1 px-2 w-auto"
-            alHacerClic={() => alEliminar && alEliminar(producto.id, producto.nombre)}
+            alHacerClic={() => props.alEliminar && props.alEliminar(props.producto.id, props.producto.nombre)}
             texto="🗑️"
           />
         </div>
       </td>
     </tr>
   );
-};
+}
 
 export default FilaProducto;

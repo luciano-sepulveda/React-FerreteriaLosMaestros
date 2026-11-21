@@ -1,26 +1,23 @@
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const FilaCategoria = ({
-  categoria,
-  alEditar
-}) => {
+function FilaCategoria(props) {
   return (
     <tr>
       <td>
-        <Etiqueta variante="light">{categoria}</Etiqueta>
+        <Etiqueta variante="light">{props.categoria}</Etiqueta>
       </td>
       <td className="text-end">
         <Boton
           variante="outline-primary"
           tamano="sm"
           claseAdicional="py-1 px-2 w-auto"
-          alHacerClic={() => alEditar && alEditar(categoria)}
+          alHacerClic={() => props.alEditar && props.alEditar(props.categoria)}
           texto="✏️ Editar"
         />
       </td>
     </tr>
   );
-};
+}
 
 export default FilaCategoria;

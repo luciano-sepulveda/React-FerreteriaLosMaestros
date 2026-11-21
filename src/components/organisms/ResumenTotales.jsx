@@ -3,17 +3,14 @@ import ResumenTotal from '../molecules/ResumenTotal';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const ResumenTotales = ({
-  subtotalNeto = 0,
-  montoIva = 0,
-  totalPagar = 0,
-  tipoEntrega = 'retiro',
-  alCambiarTipoEntrega,
-  costoDespacho = 4990,
-  alProcederCompra,
-  alGenerarCotizacion,
-  deshabilitado = false
-}) => {
+function ResumenTotales(props) {
+  const subtotalNeto = props.subtotalNeto || 0;
+  const montoIva = props.montoIva || 0;
+  const totalPagar = props.totalPagar || 0;
+  const tipoEntrega = props.tipoEntrega || 'retiro';
+  const costoDespacho = props.costoDespacho !== undefined ? props.costoDespacho : 4990;
+  const deshabilitado = props.deshabilitado || false;
+
   const esEnvio = tipoEntrega === 'despacho';
   const totalConEnvio = totalPagar + (esEnvio ? costoDespacho : 0);
 
@@ -35,18 +32,18 @@ const ResumenTotales = ({
             type="radio"
             id="entrega-retiro"
             name="tipoEntrega"
-            label="🏪 Retiro en sucursal La Serena (Gratis)"
+            label="Retiro en sucursal La Serena (Gratis)"
             checked={tipoEntrega === 'retiro'}
-            onChange={() => alCambiarTipoEntrega && alCambiarTipoEntrega('retiro')}
+            onChange={() => props.alCambiarTipoEntrega && props.alCambiarTipoEntrega('retiro')}
             className="small mb-2"
           />
           <Form.Check
             type="radio"
             id="entrega-despacho"
             name="tipoEntrega"
-            label="🚚 Despacho a faena / obra (+$4.990)"
+            label="Despacho a faena / obra (+$4.990)"
             checked={tipoEntrega === 'despacho'}
-            onChange={() => alCambiarTipoEntrega && alCambiarTipoEntrega('despacho')}
+            onChange={() => props.alCambiarTipoEntrega && props.alCambiarTipoEntrega('despacho')}
             className="small"
           />
         </div>
@@ -63,24 +60,24 @@ const ResumenTotales = ({
           <Boton
             texto="💳 Proceder a la Compra"
             variante="warning"
-            alHacerClic={alProcederCompra}
+            alHacerClic={props.alProcederCompra}
             deshabilitado={deshabilitado || totalPagar <= 0}
           />
 
           <Boton
-            texto="📄 Generar Cotización Formal"
+            texto="Generar Cotización Formal"
             variante="outline-dark"
-            alHacerClic={alGenerarCotizacion}
+            alHacerClic={props.alGenerarCotizacion}
             deshabilitado={deshabilitado || totalPagar <= 0}
           />
         </div>
 
         <small className="text-muted d-block text-center mt-3 texto-tamano-chico">
-          🔒 Transacción protegida. Emisión de boleta o factura con RUT para contratistas.
+          Transacción protegida. Emisión de boleta o factura con RUT para contratistas.
         </small>
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default ResumenTotales;

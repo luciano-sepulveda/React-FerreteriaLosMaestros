@@ -1,14 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { CATEGORIAS } from '../../data/productos';
 
-const FormularioProducto = ({
-  productoAEditar = null,
-  alGuardar,
-  alCancelar
-}) => {
+function FormularioProducto(props) {
   const datosIniciales = (p) => ({
     codigo: p?.codigo || '',
     nombre: p?.nombre || '',
@@ -23,13 +19,13 @@ const FormularioProducto = ({
     descripcion: p?.descripcion || ''
   });
 
-  const refAnterior = useRef(productoAEditar);
-  const [datos, setDatos] = useState(() => datosIniciales(productoAEditar));
+  const [productoPrevio, setProductoPrevio] = useState(props.productoAEditar);
+  const [datos, setDatos] = useState(() => datosIniciales(props.productoAEditar));
   const [errores, setErrores] = useState({});
 
-  if (refAnterior.current !== productoAEditar) {
-    refAnterior.current = productoAEditar;
-    setDatos(datosIniciales(productoAEditar));
+  if (props.productoAEditar !== productoPrevio) {
+    setProductoPrevio(props.productoAEditar);
+    setDatos(datosIniciales(props.productoAEditar));
     setErrores({});
   }
 
@@ -60,8 +56,8 @@ const FormularioProducto = ({
     e.preventDefault();
     if (!validar()) return;
 
-    if (alGuardar) {
-      alGuardar({
+    if (props.alGuardar) {
+      props.alGuardar({
         ...datos,
         precioCompra: Number(datos.precioCompra) || 0,
         precioVenta: Number(datos.precioVenta),
@@ -75,10 +71,10 @@ const FormularioProducto = ({
     <Form onSubmit={manejarEnvio} noValidate className="p-4 bg-white rounded-4 shadow-sm border">
       <div className="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
         <h5 className="fw-bold text-dark mb-0">
-          {productoAEditar ? `✏️ Editar Producto: ${productoAEditar.codigo}` : '➕ Nuevo Producto para Bodega'}
+          {props.productoAEditar ? `✏️ Editar Producto: ${props.productoAEditar.codigo}` : '➕ Nuevo Producto para Bodega'}
         </h5>
-        {alCancelar && (
-          <button type="button" className="btn-close" aria-label="Cerrar" onClick={alCancelar}></button>
+        {props.alCancelar && (
+          <button type="button" className="btn-close" aria-label="Cerrar" onClick={props.alCancelar}></button>
         )}
       </div>
 
@@ -191,24 +187,24 @@ const FormularioProducto = ({
       </Form.Group>
 
       <div className="d-flex justify-content-end gap-2">
-        {alCancelar && (
+        {props.alCancelar && (
           <Boton
             texto="Cancelar"
             variante="outline-secondary"
-            alHacerClic={alCancelar}
+            alHacerClic={props.alCancelar}
             claseAdicional="px-4"
           />
         )}
         <div className="ancho-minimo-180">
           <Boton
             tipo="submit"
-            texto={productoAEditar ? 'Guardar Cambios' : 'Crear Producto'}
+            texto={props.productoAEditar ? 'Guardar Cambios' : 'Crear Producto'}
             variante="warning"
           />
         </div>
       </div>
     </Form>
   );
-};
+}
 
 export default FormularioProducto;

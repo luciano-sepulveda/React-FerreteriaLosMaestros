@@ -3,20 +3,10 @@ import FormularioUsuario from './FormularioUsuario';
 import TablaUsuarios from './TablaUsuarios';
 import TablaPedidos from './TablaPedidos';
 
-const PanelUsuarios = ({
-  usuarios = [],
-  mostrarFormularioUsuario,
-  usuarioEditando,
-  usuarioHistorial,
-  pedidosHistorialUsuario = [],
-  alNuevoUsuario,
-  alGuardarUsuario,
-  alCancelarUsuario,
-  alEditarUsuario,
-  alVerHistorial,
-  alVolverUsuarios,
-  alVerDetallePedido
-}) => {
+function PanelUsuarios(props) {
+  const usuarios = props.usuarios || [];
+  const pedidosHistorialUsuario = props.pedidosHistorialUsuario || [];
+
   return (
     <div className="bg-white p-4 rounded-4 shadow-sm border">
       <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
@@ -28,47 +18,47 @@ const PanelUsuarios = ({
           variante="warning"
           tamano="sm"
           claseAdicional="w-auto px-3 fw-bold"
-          alHacerClic={alNuevoUsuario}
+          alHacerClic={props.alNuevoUsuario}
           texto="➕ Nuevo Usuario"
         />
       </div>
 
-      {mostrarFormularioUsuario && (
+      {props.mostrarFormularioUsuario && (
         <FormularioUsuario
-          usuarioAEditar={usuarioEditando}
-          alGuardar={alGuardarUsuario}
-          alCancelar={alCancelarUsuario}
+          usuarioAEditar={props.usuarioEditando}
+          alGuardar={props.alGuardarUsuario}
+          alCancelar={props.alCancelarUsuario}
         />
       )}
 
-      {usuarioHistorial ? (
+      {props.usuarioHistorial ? (
         <div>
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h6 className="fw-bold mb-0">
-              Historial de compras y cotizaciones de: {usuarioHistorial.nombreCompleto} ({usuarioHistorial.correo})
+              Historial de compras y cotizaciones de: {props.usuarioHistorial.nombreCompleto} ({props.usuarioHistorial.correo})
             </h6>
             <Boton
               variante="outline-dark"
               tamano="sm"
               claseAdicional="w-auto px-3"
-              alHacerClic={alVolverUsuarios}
+              alHacerClic={props.alVolverUsuarios}
               texto="← Volver a usuarios"
             />
           </div>
           <TablaPedidos
             pedidos={pedidosHistorialUsuario}
-            alVerDetalle={alVerDetallePedido}
+            alVerDetalle={props.alVerDetallePedido}
           />
         </div>
       ) : (
         <TablaUsuarios
           usuarios={usuarios}
-          alEditarUsuario={alEditarUsuario}
-          alVerHistorial={alVerHistorial}
+          alEditarUsuario={props.alEditarUsuario}
+          alVerHistorial={props.alVerHistorial}
         />
       )}
     </div>
   );
-};
+}
 
 export default PanelUsuarios;

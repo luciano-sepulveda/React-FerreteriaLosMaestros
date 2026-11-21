@@ -2,11 +2,10 @@ import { Table } from 'react-bootstrap';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const TablaCriticos = ({
-  criticos = [],
-  alReponerStock,
-  modoCompacto = false
-}) => {
+function TablaCriticos(props) {
+  const criticos = props.criticos || [];
+  const modoCompacto = props.modoCompacto || false;
+
   if (criticos.length === 0) {
     return (
       <div className="text-center py-4 text-success">
@@ -44,7 +43,7 @@ const TablaCriticos = ({
                       variante="outline-success"
                       tamano="sm"
                       claseAdicional="py-0 px-2 w-auto"
-                      alHacerClic={() => alReponerStock(item.id, item.stock)}
+                      alHacerClic={() => props.alReponerStock && props.alReponerStock(item.id, item.stock)}
                       texto="+25 Reponer"
                     />
                   </td>
@@ -87,7 +86,7 @@ const TablaCriticos = ({
                   variante="success"
                   tamano="sm"
                   claseAdicional="py-1 px-3 w-auto fw-bold"
-                  alHacerClic={() => alReponerStock(prod.id, prod.stock)}
+                  alHacerClic={() => props.alReponerStock && props.alReponerStock(prod.id, prod.stock)}
                   texto="📥 Reponer +25 u."
                 />
               </td>
@@ -97,6 +96,6 @@ const TablaCriticos = ({
       </Table>
     </div>
   );
-};
+}
 
 export default TablaCriticos;

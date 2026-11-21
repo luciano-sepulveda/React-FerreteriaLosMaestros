@@ -1,12 +1,12 @@
 import { Card } from 'react-bootstrap';
 
-const PerfilAdministrador = ({ usuario }) => {
-  const nombre = usuario?.nombreCompleto || 'Administrador de Faenas / Bodega';
-  const rol = usuario?.rol || 'Administrador Bodega';
-  const sucursal = usuario?.sucursal || 'Balmaceda 1420, La Serena';
-  const permisos = usuario?.permisos || 'CRUD Catálogo, Control de Stock, Validación de Pedidos';
-  const correo = usuario?.correo || 'admin@ferreterialosmaestros.cl';
-  const telefono = usuario?.telefono || '+56 51 222 3344';
+function PerfilAdministrador(props) {
+  const nombre = props.usuario?.nombreCompleto || 'Administrador de Faenas / Bodega';
+  const rol = props.usuario?.rol || 'Administrador Bodega';
+  const sucursal = props.usuario?.sucursal || 'Balmaceda 1420, La Serena';
+  const permisos = props.usuario?.permisos || 'CRUD Catálogo, Control de Stock, Validación de Pedidos';
+  const correo = props.usuario?.correo || 'admin@ferreterialosmaestros.cl';
+  const telefono = props.usuario?.telefono || '+56 51 222 3344';
 
   return (
     <Card className="border-0 shadow-sm rounded-4 p-4 bg-dark text-white">
@@ -37,6 +37,6 @@ const PerfilAdministrador = ({ usuario }) => {
       </div>
     </Card>
   );
-};
+}
 
 export default PerfilAdministrador;

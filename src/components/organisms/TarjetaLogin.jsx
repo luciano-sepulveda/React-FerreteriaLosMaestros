@@ -3,10 +3,8 @@ import { Card, Nav } from 'react-bootstrap';
 import FormularioLogin from './FormularioLogin';
 import FormularioRegistro from './FormularioRegistro';
 
-const TarjetaLogin = ({
-  alLoginExitoso,
-  modoInicial = 'login'
-}) => {
+function TarjetaLogin(props) {
+  const modoInicial = props.modoInicial || 'login';
   const [modo, setModo] = useState(modoInicial);
 
   return (
@@ -14,7 +12,7 @@ const TarjetaLogin = ({
       <Card.Body>
         <div className="text-center mb-3">
           <div className="d-inline-flex p-3 rounded-circle bg-warning bg-opacity-25 mb-2">
-            <span className="fs-3">🔨</span>
+            <span className="fs-3"></span>
           </div>
           <h3 className="fw-bold text-dark mb-1">Ferretería Los Maestros</h3>
           <p className="text-muted small">
@@ -47,17 +45,17 @@ const TarjetaLogin = ({
 
         {modo === 'login' ? (
           <FormularioLogin
-            alEnviar={alLoginExitoso}
+            alEnviar={props.alLoginExitoso}
           />
         ) : (
           <FormularioRegistro
-            alRegistrarExitoso={alLoginExitoso}
+            alRegistrarExitoso={props.alLoginExitoso}
             alIrALogin={() => setModo('login')}
           />
         )}
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default TarjetaLogin;

@@ -3,11 +3,11 @@ import TarjetaIndicador from '../molecules/TarjetaIndicador';
 import Etiqueta from '../atoms/Etiqueta';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
-const PanelReportes = ({
-  conteoPedidos = { compras: 0, cotizaciones: 0, total: 0 },
-  montoTotalCompras = 0,
-  productosMasSolicitados = []
-}) => {
+function PanelReportes(props) {
+  const conteoPedidos = props.conteoPedidos || { compras: 0, cotizaciones: 0, total: 0 };
+  const montoTotalCompras = props.montoTotalCompras || 0;
+  const productosMasSolicitados = props.productosMasSolicitados || [];
+
   return (
     <div>
       <Row className="g-3 mb-4">
@@ -90,6 +90,6 @@ const PanelReportes = ({
       </Card>
     </div>
   );
-};
+}
 
 export default PanelReportes;

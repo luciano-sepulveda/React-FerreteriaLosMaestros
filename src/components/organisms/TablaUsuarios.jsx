@@ -1,11 +1,9 @@
 import { Table } from 'react-bootstrap';
 import FilaUsuario from '../molecules/FilaUsuario';
 
-const TablaUsuarios = ({
-  usuarios = [],
-  alEditarUsuario,
-  alVerHistorial
-}) => {
+function TablaUsuarios(props) {
+  const usuarios = props.usuarios || [];
+
   return (
     <div className="table-responsive">
       <Table hover className="align-middle small">
@@ -25,14 +23,14 @@ const TablaUsuarios = ({
             <FilaUsuario
               key={usr.id}
               usuario={usr}
-              alEditar={alEditarUsuario}
-              alVerHistorial={alVerHistorial}
+              alEditar={props.alEditarUsuario}
+              alVerHistorial={props.alVerHistorial}
             />
           ))}
         </tbody>
       </Table>
     </div>
   );
-};
+}
 
 export default TablaUsuarios;

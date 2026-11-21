@@ -4,7 +4,8 @@ import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { validarCorreo, validarClave } from '../../utils/validaciones';
 
-const FormularioLogin = ({ alEnviar, estaCargando = false }) => {
+function FormularioLogin(props) {
+  const estaCargando = props.estaCargando || false;
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const [errores, setErrores] = useState({ correo: '', clave: '' });
@@ -27,8 +28,8 @@ const FormularioLogin = ({ alEnviar, estaCargando = false }) => {
     }
 
     setMensajeExito('Usuario validado con éxito. Redirigiendo al catálogo');
-    if (alEnviar) {
-      alEnviar({
+    if (props.alEnviar) {
+      props.alEnviar({
         correo,
         clave
       });
@@ -99,6 +100,6 @@ const FormularioLogin = ({ alEnviar, estaCargando = false }) => {
       </div>
     </Form>
   );
-};
+}
 
 export default FormularioLogin;

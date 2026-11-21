@@ -4,12 +4,8 @@ import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { validarRequerido } from '../../utils/validaciones';
 
-const FormularioCategoria = ({
-  categoriaAEditar = '',
-  alGuardar,
-  alCancelar
-}) => {
-  const [nombre, setNombre] = useState(categoriaAEditar || '');
+function FormularioCategoria(props) {
+  const [nombre, setNombre] = useState(props.categoriaAEditar || '');
   const [error, setError] = useState('');
 
   const manejarEnvio = (e) => {
@@ -21,7 +17,9 @@ const FormularioCategoria = ({
     }
 
     try {
-      alGuardar(nombre.trim());
+      if (props.alGuardar) {
+        props.alGuardar(nombre.trim());
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -31,7 +29,7 @@ const FormularioCategoria = ({
     <Card className="border-0 shadow-sm rounded-4 mb-4">
       <Card.Header className="bg-dark text-white py-3">
         <h5 className="fw-bold mb-0 text-warning">
-          {categoriaAEditar ? 'Editar Categoría' : 'Nueva Categoría'}
+          {props.categoriaAEditar ? 'Editar Categoría' : 'Nueva Categoría'}
         </h5>
       </Card.Header>
       <Card.Body className="p-4">
@@ -52,7 +50,7 @@ const FormularioCategoria = ({
               variante="outline-secondary"
               tamano="sm"
               claseAdicional="w-auto px-4"
-              alHacerClic={alCancelar}
+              alHacerClic={props.alCancelar}
               texto="Cancelar"
             />
             <Boton
@@ -67,6 +65,6 @@ const FormularioCategoria = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default FormularioCategoria;

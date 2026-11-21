@@ -1,14 +1,13 @@
 import { Table } from 'react-bootstrap';
 import FilaPedido from '../molecules/FilaPedido';
 
-const TablaPedidos = ({
-  pedidos = [],
-  alVerDetalle
-}) => {
+function TablaPedidos(props) {
+  const pedidos = props.pedidos || [];
+
   if (pedidos.length === 0) {
     return (
       <div className="text-center py-5">
-        <div className="fs-1 mb-2">📋</div>
+        <div className="fs-1 mb-2"></div>
         <h6 className="fw-bold text-dark">No hay pedidos registrados en el historial</h6>
         <p className="text-muted small">
           Cuando los clientes completen el carrito o cotizaciones aparecerán aquí para su preparación y despacho.
@@ -29,7 +28,7 @@ const TablaPedidos = ({
             <th>Entrega</th>
             <th className="text-end">Total</th>
             <th className="text-center">Estado</th>
-            {alVerDetalle && <th className="text-center">Acción</th>}
+            {props.alVerDetalle && <th className="text-center">Acción</th>}
           </tr>
         </thead>
         <tbody>
@@ -37,13 +36,13 @@ const TablaPedidos = ({
             <FilaPedido
               key={pedido.folio}
               pedido={pedido}
-              alVerDetalle={alVerDetalle}
+              alVerDetalle={props.alVerDetalle}
             />
           ))}
         </tbody>
       </Table>
     </div>
   );
-};
+}
 
 export default TablaPedidos;

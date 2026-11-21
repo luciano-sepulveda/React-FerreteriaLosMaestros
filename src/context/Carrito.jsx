@@ -3,7 +3,7 @@ import { CarritoContext } from './CarritoContexto';
 
 const CLAVE_ALMACENAMIENTO = 'ferreteria_los_maestros_carrito';
 
-export const CarritoProvider = ({ children }) => {
+export function CarritoProvider(props) {
   const [elementosCarrito, setElementosCarrito] = useState(() => {
     try {
       const guardado = localStorage.getItem(CLAVE_ALMACENAMIENTO);
@@ -115,7 +115,7 @@ export const CarritoProvider = ({ children }) => {
         totalPagar
       }}
     >
-      {children}
+      {props.children}
     </CarritoContext.Provider>
   );
-};
+}

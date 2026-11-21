@@ -3,17 +3,14 @@ import TarjetaIndicador from '../molecules/TarjetaIndicador';
 import TablaCriticos from './TablaCriticos';
 import PerfilAdministrador from './PerfilAdministrador';
 
-const ResumenDashboard = ({
-  cantidadProductos = 0,
-  cantidadCategorias = 0,
-  cantidadCriticos = 0,
-  totalUnidades = 0,
-  cantidadUsuarios = 0,
-  criticos = [],
-  usuarioAdministrador,
-  alCambiarPestana,
-  alReponerStock
-}) => {
+function ResumenDashboard(props) {
+  const cantidadProductos = props.cantidadProductos || 0;
+  const cantidadCategorias = props.cantidadCategorias || 0;
+  const cantidadCriticos = props.cantidadCriticos || 0;
+  const totalUnidades = props.totalUnidades || 0;
+  const cantidadUsuarios = props.cantidadUsuarios || 0;
+  const criticos = props.criticos || [];
+
   return (
     <div>
       <Row className="g-3 mb-4">
@@ -23,7 +20,7 @@ const ResumenDashboard = ({
             valor={`${cantidadProductos} ítems`}
             detalle={`Distribuido en ${cantidadCategorias} categorías`}
             variante="warning"
-            alHacerClic={() => alCambiarPestana('catalogo')}
+            alHacerClic={() => props.alCambiarPestana && props.alCambiarPestana('catalogo')}
           />
         </Col>
 
@@ -33,7 +30,7 @@ const ResumenDashboard = ({
             valor={`${cantidadCriticos} productos`}
             detalle="Requieren orden de reposición"
             variante="danger"
-            alHacerClic={() => alCambiarPestana('criticos')}
+            alHacerClic={() => props.alCambiarPestana && props.alCambiarPestana('criticos')}
           />
         </Col>
 
@@ -43,7 +40,7 @@ const ResumenDashboard = ({
             valor={`${totalUnidades} u.`}
             detalle="Valorizadas con IVA inc."
             variante="success"
-            alHacerClic={() => alCambiarPestana('catalogo')}
+            alHacerClic={() => props.alCambiarPestana && props.alCambiarPestana('catalogo')}
           />
         </Col>
 
@@ -53,7 +50,7 @@ const ResumenDashboard = ({
             valor={`${cantidadUsuarios} cuentas`}
             detalle="Particulares y Contratistas"
             variante="primary"
-            alHacerClic={() => alCambiarPestana('usuarios')}
+            alHacerClic={() => props.alCambiarPestana && props.alCambiarPestana('usuarios')}
           />
         </Col>
       </Row>
@@ -63,19 +60,19 @@ const ResumenDashboard = ({
           <Card className="border-0 shadow-sm rounded-4 p-4 bg-white">
             <h5 className="fw-bold text-dark border-bottom pb-2 mb-3">Atención Rápida de Bodega</h5>
             {criticos.length > 0 ? (
-              <TablaCriticos criticos={criticos} alReponerStock={alReponerStock} modoCompacto={true} />
+              <TablaCriticos criticos={criticos} alReponerStock={props.alReponerStock} modoCompacto={true} />
             ) : (
-              <p className="text-success small mb-0">✓ No hay productos con quiebre de stock en este momento.</p>
+              <p className="text-success small mb-0">No hay productos con quiebre de stock en este momento.</p>
             )}
           </Card>
         </Col>
 
         <Col lg={5}>
-          <PerfilAdministrador usuario={usuarioAdministrador} />
+          <PerfilAdministrador usuario={props.usuarioAdministrador} />
         </Col>
       </Row>
     </div>
   );
-};
+}
 
 export default ResumenDashboard;

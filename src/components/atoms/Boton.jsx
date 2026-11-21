@@ -1,34 +1,20 @@
 import { Button } from 'react-bootstrap';
 
-const Boton = ({
-  texto,
-  children,
-  tipo = 'button',
-  type,
-  variante = 'warning',
-  variant,
-  alHacerClic,
-  onClick,
-  deshabilitado = false,
-  disabled,
-  tamano,
-  size,
-  claseAdicional = ''
-}) => {
-  const claseFinal = claseAdicional ? `${claseAdicional} fw-bold` : 'w-100 fw-bold';
+function Boton(props) {
+  const claseFinal = props.claseAdicional ? `${props.claseAdicional} fw-bold` : 'w-100 fw-bold';
 
   return (
     <Button
-      variant={variant || variante}
-      type={type || tipo}
-      onClick={alHacerClic || onClick}
-      disabled={disabled || deshabilitado}
-      size={size || tamano}
+      variant={props.variant || props.variante || 'warning'}
+      type={props.type || props.tipo || 'button'}
+      onClick={props.alHacerClic || props.onClick}
+      disabled={props.disabled !== undefined ? props.disabled : (props.deshabilitado || false)}
+      size={props.size || props.tamano}
       className={claseFinal.trim()}
     >
-      {texto || children}
+      {props.texto || props.children}
     </Button>
   );
-};
+}
 
 export default Boton;

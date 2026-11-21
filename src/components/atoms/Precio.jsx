@@ -1,7 +1,7 @@
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
-const Precio = ({ valor }) => {
-  return <p className="fw-bold fs-5 text-danger mb-2">{formatearPrecio(valor)}</p>;
-};
+function Precio(props) {
+  return <p className="fw-bold fs-5 text-danger mb-2">{formatearPrecio(props.valor)}</p>;
+}
 
 export default Precio;

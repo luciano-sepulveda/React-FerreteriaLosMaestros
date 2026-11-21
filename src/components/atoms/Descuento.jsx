@@ -1,19 +1,16 @@
 import { Badge } from 'react-bootstrap';
 
-const Descuento = ({
-  porcentaje,
-  claseAdicional = ''
-}) => {
-  if (!porcentaje) return null;
+function Descuento(props) {
+  if (!props.porcentaje) return null;
 
   return (
     <Badge
       bg="danger"
-      className={`px-2 py-1 fw-bold text-uppercase shadow-sm ${claseAdicional}`.trim()}
+      className={`px-2 py-1 fw-bold text-uppercase shadow-sm ${props.claseAdicional || ''}`.trim()}
     >
-      -{porcentaje}% DCTO
+      -{props.porcentaje}% DCTO
     </Badge>
   );
-};
+}
 
 export default Descuento;

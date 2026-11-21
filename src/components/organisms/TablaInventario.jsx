@@ -3,14 +3,10 @@ import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import FilaProducto from '../molecules/FilaProducto';
 
-const TablaInventario = ({
-  productos = [],
-  filtroTexto = '',
-  alCambiarFiltro,
-  alNuevoProducto,
-  alEditarProducto,
-  alEliminarProducto
-}) => {
+function TablaInventario(props) {
+  const productos = props.productos || [];
+  const filtroTexto = props.filtroTexto || '';
+
   return (
     <div className="bg-white p-4 rounded-4 shadow-sm border">
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
@@ -19,7 +15,7 @@ const TablaInventario = ({
             tipo="search"
             marcador="Buscar por código, nombre o categoría..."
             valor={filtroTexto}
-            alCambiar={(e) => alCambiarFiltro(e.target.value)}
+            alCambiar={(e) => props.alCambiarFiltro && props.alCambiarFiltro(e.target.value)}
           />
         </div>
 
@@ -27,8 +23,8 @@ const TablaInventario = ({
           variante="warning"
           tamano="sm"
           claseAdicional="w-auto px-3 fw-bold"
-          alHacerClic={alNuevoProducto}
-          texto="➕ Agregar Producto"
+          alHacerClic={props.alNuevoProducto}
+          texto="Agregar Producto"
         />
       </div>
 
@@ -50,8 +46,8 @@ const TablaInventario = ({
               <FilaProducto
                 key={item.id}
                 producto={item}
-                alEditar={alEditarProducto}
-                alEliminar={alEliminarProducto}
+                alEditar={props.alEditarProducto}
+                alEliminar={props.alEliminarProducto}
               />
             ))}
           </tbody>
@@ -59,6 +55,6 @@ const TablaInventario = ({
       </div>
     </div>
   );
-};
+}
 
 export default TablaInventario;

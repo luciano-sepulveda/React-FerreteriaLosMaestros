@@ -6,21 +6,18 @@ import Etiqueta from '../atoms/Etiqueta';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 import { validarRequerido, validarEmail, validarRut } from '../../utils/validaciones';
 
-const FormularioCompra = ({
-  totalPagar = 0,
-  tipoEntrega = 'retiro',
-  datosIniciales,
-  alConfirmarCompra,
-  alCancelar
-}) => {
+function FormularioCompra(props) {
+  const totalPagar = props.totalPagar || 0;
+  const tipoEntrega = props.tipoEntrega || 'retiro';
+
   const [datos, setDatos] = useState({
-    nombreCompleto: datosIniciales?.nombreCompleto || '',
-    rut: datosIniciales?.rut || '',
-    correo: datosIniciales?.correo || '',
-    telefono: datosIniciales?.telefono || '',
-    direccionEntrega: datosIniciales?.direccionEntrega || '',
-    comuna: datosIniciales?.comuna || 'La Serena',
-    tipoCliente: datosIniciales?.tipoCliente || (datosIniciales?.rol?.toLowerCase().includes('contratista') ? 'contratista' : 'particular'),
+    nombreCompleto: props.datosIniciales?.nombreCompleto || '',
+    rut: props.datosIniciales?.rut || '',
+    correo: props.datosIniciales?.correo || '',
+    telefono: props.datosIniciales?.telefono || '',
+    direccionEntrega: props.datosIniciales?.direccionEntrega || '',
+    comuna: props.datosIniciales?.comuna || 'La Serena',
+    tipoCliente: props.datosIniciales?.tipoCliente || (props.datosIniciales?.rol?.toLowerCase().includes('contratista') ? 'contratista' : 'particular'),
     medioPago: 'webpay',
     observaciones: ''
   });
@@ -66,8 +63,8 @@ const FormularioCompra = ({
     setProcesando(true);
     setTimeout(() => {
       setProcesando(false);
-      if (alConfirmarCompra) {
-        alConfirmarCompra({
+      if (props.alConfirmarCompra) {
+        props.alConfirmarCompra({
           ...datos,
           tipoEntrega,
           totalPagar,
@@ -224,7 +221,7 @@ const FormularioCompra = ({
               <Boton
                 texto="Volver al Carrito"
                 variante="outline-secondary"
-                alHacerClic={alCancelar}
+                alHacerClic={props.alCancelar}
                 deshabilitado={procesando}
               />
             </div>
@@ -241,6 +238,6 @@ const FormularioCompra = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default FormularioCompra;

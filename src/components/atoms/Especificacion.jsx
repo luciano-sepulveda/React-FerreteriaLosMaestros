@@ -1,19 +1,15 @@
 
-const Especificacion = ({
-  etiqueta,
-  valor,
-  claseAdicional = ''
-}) => {
+function Especificacion(props) {
   return (
-    <div className={`p-2 bg-light rounded border ${claseAdicional}`.trim()}>
+    <div className={`p-2 bg-light rounded border ${props.claseAdicional || ''}`.trim()}>
       <span className="text-muted small d-block texto-tamano-chico">
-        {etiqueta}
+        {props.etiqueta}
       </span>
       <span className="fw-semibold text-dark small">
-        {valor || 'No especificado'}
+        {props.valor || 'No especificado'}
       </span>
     </div>
   );
-};
+}
 
 export default Especificacion;

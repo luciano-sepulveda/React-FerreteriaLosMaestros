@@ -1,34 +1,15 @@
 import { Form } from 'react-bootstrap';
 
-const CampoFormulario = ({
-  id,
-  identificador,
-  etiqueta,
-  label,
-  tipo = 'text',
-  type,
-  marcador = '',
-  placeholder = '',
-  valor,
-  value,
-  alCambiar,
-  onChange,
-  error = '',
-  deshabilitado = false,
-  disabled,
-  autocompletar = 'off',
-  autoComplete,
-  ayuda = ''
-}) => {
-  const tieneError = Boolean(error);
-  const idCampo = identificador || id;
-  const textoEtiqueta = etiqueta || label;
-  const tipoCampo = type || tipo;
-  const textoMarcador = placeholder || marcador;
-  const valorCampo = valor !== undefined ? valor : value;
-  const manejadorCambio = alCambiar || onChange;
-  const estaDeshabilitado = disabled !== undefined ? disabled : deshabilitado;
-  const modoAutocompletar = autoComplete || autocompletar;
+function CampoFormulario(props) {
+  const tieneError = Boolean(props.error);
+  const idCampo = props.identificador || props.id;
+  const textoEtiqueta = props.etiqueta || props.label;
+  const tipoCampo = props.type || props.tipo || 'text';
+  const textoMarcador = props.placeholder || props.marcador || '';
+  const valorCampo = props.valor !== undefined ? props.valor : (props.value !== undefined ? props.value : '');
+  const manejadorCambio = props.alCambiar || props.onChange;
+  const estaDeshabilitado = props.disabled !== undefined ? props.disabled : (props.deshabilitado || false);
+  const modoAutocompletar = props.autoComplete || props.autocompletar || 'off';
 
   return (
     <Form.Group controlId={idCampo} className="mb-3 text-start">
@@ -45,13 +26,13 @@ const CampoFormulario = ({
       />
       {tieneError ? (
         <Form.Control.Feedback type="invalid" className="d-block small mt-1">
-          {error}
+          {props.error}
         </Form.Control.Feedback>
-      ) : ayuda ? (
-        <Form.Text className="text-muted small">{ayuda}</Form.Text>
+      ) : props.ayuda ? (
+        <Form.Text className="text-muted small">{props.ayuda}</Form.Text>
       ) : null}
     </Form.Group>
   );
-};
+}
 
 export default CampoFormulario;

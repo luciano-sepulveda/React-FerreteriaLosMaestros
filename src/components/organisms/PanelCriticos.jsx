@@ -1,10 +1,9 @@
 import { Badge } from 'react-bootstrap';
 import TablaCriticos from './TablaCriticos';
 
-const PanelCriticos = ({
-  criticos = [],
-  alReponerStock
-}) => {
+function PanelCriticos(props) {
+  const criticos = props.criticos || [];
+
   return (
     <div className="bg-white p-4 rounded-4 shadow-sm border">
       <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
@@ -17,9 +16,9 @@ const PanelCriticos = ({
         </Badge>
       </div>
 
-      <TablaCriticos criticos={criticos} alReponerStock={alReponerStock} />
+      <TablaCriticos criticos={criticos} alReponerStock={props.alReponerStock} />
     </div>
   );
-};
+}
 
 export default PanelCriticos;

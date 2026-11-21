@@ -1,13 +1,9 @@
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
-export const FilaResumen = ({
-  etiqueta,
-  valor,
-  esTotal = false,
-  esGratis = false,
-  textoSecundario = '',
-  varianteColor = ''
-}) => {
+export function FilaResumen(props) {
+  const esTotal = props.esTotal || false;
+  const esGratis = props.esGratis || false;
+
   return (
     <div
       className={`d-flex justify-content-between align-items-center py-2 ${
@@ -16,11 +12,11 @@ export const FilaResumen = ({
     >
       <div>
         <span className={esTotal ? 'fw-bold fs-5 text-dark' : 'text-muted small'}>
-          {etiqueta}
+          {props.etiqueta}
         </span>
-        {textoSecundario && (
+        {props.textoSecundario && (
           <small className="d-block text-muted texto-tamano-chico">
-            {textoSecundario}
+            {props.textoSecundario}
           </small>
         )}
       </div>
@@ -33,27 +29,26 @@ export const FilaResumen = ({
             className={
               esTotal
                 ? 'fw-bold fs-4 text-danger'
-                : varianteColor
-                ? `fw-semibold ${varianteColor}`
+                : props.varianteColor
+                ? `fw-semibold ${props.varianteColor}`
                 : 'fw-semibold text-dark'
             }
           >
-            {formatearPrecio(valor)}
+            {formatearPrecio(props.valor)}
           </span>
         )}
       </div>
     </div>
   );
-};
+}
 
-const ResumenTotal = ({
-  subtotalNeto = 0,
-  montoIva = 0,
-  totalPagar = 0,
-  costoEnvio = 0,
-  esEnvioGratis = true,
-  children
-}) => {
+function ResumenTotal(props) {
+  const subtotalNeto = props.subtotalNeto || 0;
+  const montoIva = props.montoIva || 0;
+  const totalPagar = props.totalPagar || 0;
+  const costoEnvio = props.costoEnvio || 0;
+  const esEnvioGratis = props.esEnvioGratis !== undefined ? props.esEnvioGratis : true;
+
   return (
     <div className="p-3 bg-white rounded-3 border shadow-sm">
       <h6 className="fw-bold text-dark border-bottom pb-2 mb-2">Desglose de Valores</h6>
@@ -83,9 +78,9 @@ const ResumenTotal = ({
         esTotal={true}
       />
 
-      {children}
+      {props.children}
     </div>
   );
-};
+}
 
 export default ResumenTotal;

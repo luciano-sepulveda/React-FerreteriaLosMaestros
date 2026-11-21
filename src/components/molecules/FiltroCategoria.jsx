@@ -1,23 +1,21 @@
 import Boton from '../atoms/Boton';
 
-const FiltroCategoria = ({
-  categoriaSeleccionada,
-  categorias = [],
-  alSeleccionarCategoria
-}) => {
+function FiltroCategoria(props) {
+  const listaCategorias = props.categorias || [];
+
   return (
     <div className="d-flex flex-wrap gap-2 mb-4">
       <Boton
         tipo="button"
-        variante={!categoriaSeleccionada ? 'dark' : 'outline-secondary'}
+        variante={!props.categoriaSeleccionada ? 'dark' : 'outline-secondary'}
         tamano="sm"
         claseAdicional="w-auto px-3"
-        alHacerClic={() => alSeleccionarCategoria && alSeleccionarCategoria('')}
+        alHacerClic={() => props.alSeleccionarCategoria && props.alSeleccionarCategoria('')}
         texto="Todas las categorías"
       />
 
-      {categorias.map((categoria) => {
-        const estaActiva = categoriaSeleccionada === categoria;
+      {listaCategorias.map((categoria) => {
+        const estaActiva = props.categoriaSeleccionada === categoria;
         return (
           <Boton
             key={categoria}
@@ -25,13 +23,13 @@ const FiltroCategoria = ({
             variante={estaActiva ? 'warning' : 'outline-secondary'}
             tamano="sm"
             claseAdicional={`w-auto px-3 ${estaActiva ? 'text-dark' : ''}`}
-            alHacerClic={() => alSeleccionarCategoria && alSeleccionarCategoria(categoria)}
+            alHacerClic={() => props.alSeleccionarCategoria && props.alSeleccionarCategoria(categoria)}
             texto={categoria}
           />
         );
       })}
     </div>
   );
-};
+}
 
 export default FiltroCategoria;

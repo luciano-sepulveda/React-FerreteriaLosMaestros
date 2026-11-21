@@ -1,29 +1,28 @@
 import Boton from '../atoms/Boton';
 import CampoNumero from '../atoms/CampoNumero';
 
-const ControlCantidad = ({
-  cantidad = 1,
-  stockMaximo = 999,
-  alCambiar,
-  deshabilitado = false,
-  tamano = 'sm'
-}) => {
+function ControlCantidad(props) {
+  const cantidad = props.cantidad !== undefined ? props.cantidad : 1;
+  const stockMaximo = props.stockMaximo !== undefined ? props.stockMaximo : 999;
+  const deshabilitado = props.deshabilitado || false;
+  const tamano = props.tamano || 'sm';
+
   const manejarDecrementar = () => {
-    if (cantidad > 1 && alCambiar) {
-      alCambiar(cantidad - 1);
+    if (cantidad > 1 && props.alCambiar) {
+      props.alCambiar(cantidad - 1);
     }
   };
 
   const manejarIncrementar = () => {
-    if (cantidad < stockMaximo && alCambiar) {
-      alCambiar(cantidad + 1);
+    if (cantidad < stockMaximo && props.alCambiar) {
+      props.alCambiar(cantidad + 1);
     }
   };
 
   const manejarCambioDirecto = (nuevoValor) => {
-    if (alCambiar) {
+    if (props.alCambiar) {
       const valorAjustado = Math.max(1, Math.min(nuevoValor, stockMaximo));
-      alCambiar(valorAjustado);
+      props.alCambiar(valorAjustado);
     }
   };
 
@@ -57,6 +56,6 @@ const ControlCantidad = ({
       />
     </div>
   );
-};
+}
 
 export default ControlCantidad;

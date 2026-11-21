@@ -1,24 +1,20 @@
 import { Card } from 'react-bootstrap';
 
-const TarjetaIndicador = ({
-  titulo,
-  valor,
-  detalle,
-  variante = 'warning',
-  alHacerClic
-}) => {
+function TarjetaIndicador(props) {
+  const variante = props.variante || 'warning';
+
   return (
     <Card
-      className={`border-0 shadow-sm rounded-4 p-3 bg-white border-start border-${variante} border-4 ${alHacerClic ? 'cursor-puntero' : ''}`}
-      onClick={alHacerClic}
+      className={`border-0 shadow-sm rounded-4 p-3 bg-white border-start border-${variante} border-4 ${props.alHacerClic ? 'cursor-puntero' : ''}`}
+      onClick={props.alHacerClic}
     >
-      <span className="text-muted small">{titulo}</span>
+      <span className="text-muted small">{props.titulo}</span>
       <h3 className={`fw-bold text-${variante === 'warning' ? 'dark' : variante} mt-1 mb-1`}>
-        {valor}
+        {props.valor}
       </h3>
-      {detalle && <small className="text-secondary">{detalle}</small>}
+      {props.detalle && <small className="text-secondary">{props.detalle}</small>}
     </Card>
   );
-};
+}
 
 export default TarjetaIndicador;

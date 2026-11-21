@@ -9,48 +9,27 @@ import Descuento from '../atoms/Descuento';
 import ControlCantidad from './ControlCantidad';
 import { obtenerEstadoStock } from '../../utils/stockUtils';
 
-const TarjetaProducto = ({
-  producto,
-  alCotizar,
-  alAgregarAlCarrito,
-  alVerDetalle
-}) => {
+function TarjetaProducto(props) {
   const navegar = useNavigate();
   const [cantidad, setCantidad] = useState(1);
   const [agregadoReciente, setAgregadoReciente] = useState(false);
 
-  const {
-    id,
-    codigo,
-    nombre,
-    marca,
-    categoria,
-    unidad,
-    precioVenta,
-    precioAnterior,
-    enOferta,
-    porcentajeDescuento,
-    stock,
-    stockMinimo,
-    descripcion
-  } = producto;
-
-  const estadoStock = obtenerEstadoStock(stock, stockMinimo);
-  const sinStock = stock <= 0;
+  const estadoStock = obtenerEstadoStock(props.producto.stock, props.producto.stockMinimo);
+  const sinStock = props.producto.stock <= 0;
 
   const manejarAgregarCarrito = () => {
-    if (alAgregarAlCarrito && !sinStock) {
-      alAgregarAlCarrito(producto, cantidad);
+    if (props.alAgregarAlCarrito && !sinStock) {
+      props.alAgregarAlCarrito(props.producto, cantidad);
       setAgregadoReciente(true);
       setTimeout(() => setAgregadoReciente(false), 1800);
     }
   };
 
   const manejarVer = () => {
-    if (alVerDetalle) {
-      alVerDetalle(producto);
+    if (props.alVerDetalle) {
+      props.alVerDetalle(props.producto);
     } else {
-      navegar(`/producto/${id}`);
+      navegar(`/producto/${props.producto.id}`);
     }
   };
 
@@ -59,34 +38,34 @@ const TarjetaProducto = ({
       <Card.Body className="d-flex flex-column p-3">
         <div className="d-flex justify-content-between align-items-start mb-2">
           <Etiqueta variante="light" claseAdicional="text-secondary border small">
-            {codigo}
+            {props.producto.codigo}
           </Etiqueta>
           <Stock texto={estadoStock.texto} variante={estadoStock.variante} />
         </div>
 
-        <span className="text-muted small mb-1">{categoria} · {marca}</span>
+        <span className="text-muted small mb-1">{props.producto.categoria} · {props.producto.marca}</span>
         <Card.Title
           className="h6 fw-bold text-dark text-truncate cursor-puntero"
-          title={nombre}
+          title={props.producto.nombre}
           onClick={manejarVer}
         >
-          {nombre}
+          {props.producto.nombre}
         </Card.Title>
 
         <Card.Text className="text-muted small flex-grow-1 tarjeta-producto-descripcion">
-          {descripcion || `Unidad de venta: ${unidad}`}
+          {props.producto.descripcion || `Unidad de venta: ${props.producto.unidad}`}
         </Card.Text>
 
         <div className="mt-2 pt-2 border-top">
           <div className="d-flex justify-content-between align-items-center mb-1">
             <span className="text-muted small">Precio Venta (IVA inc.)</span>
-            {enOferta && <Descuento porcentaje={porcentajeDescuento} />}
+            {props.producto.enOferta && <Descuento porcentaje={props.producto.porcentajeDescuento} />}
           </div>
           <div className="d-flex align-items-baseline gap-2">
-            <Precio valor={precioVenta} />
-            {precioAnterior && (
+            <Precio valor={props.producto.precioVenta} />
+            {props.producto.precioAnterior && (
               <span className="text-muted text-decoration-line-through small">
-                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(precioAnterior)}
+                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(props.producto.precioAnterior)}
               </span>
             )}
           </div>
@@ -97,7 +76,7 @@ const TarjetaProducto = ({
             <span className="text-muted small">Cantidad:</span>
             <ControlCantidad
               cantidad={cantidad}
-              stockMaximo={stock}
+              stockMaximo={props.producto.stock}
               alCambiar={setCantidad}
               tamano="sm"
             />
@@ -122,7 +101,7 @@ const TarjetaProducto = ({
             <Boton
               texto="📄 Cotizar"
               variante="outline-dark"
-              alHacerClic={() => alCotizar && alCotizar(producto, cantidad)}
+              alHacerClic={() => props.alCotizar && props.alCotizar(props.producto, cantidad)}
             />
             <Boton
               texto="🔍 Ver"
@@ -134,6 +113,6 @@ const TarjetaProducto = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default TarjetaProducto;

@@ -2,15 +2,9 @@ import Boton from '../atoms/Boton';
 import FormularioCategoria from './FormularioCategoria';
 import TablaCategorias from './TablaCategorias';
 
-const PanelCategorias = ({
-  categorias = [],
-  mostrarFormularioCategoria,
-  categoriaEditando,
-  alNuevaCategoria,
-  alGuardarCategoria,
-  alCancelarCategoria,
-  alEditarCategoria
-}) => {
+function PanelCategorias(props) {
+  const categorias = props.categorias || [];
+
   return (
     <div className="bg-white p-4 rounded-4 shadow-sm border">
       <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
@@ -22,25 +16,25 @@ const PanelCategorias = ({
           variante="warning"
           tamano="sm"
           claseAdicional="w-auto px-3 fw-bold"
-          alHacerClic={alNuevaCategoria}
-          texto="➕ Nueva Categoría"
+          alHacerClic={props.alNuevaCategoria}
+          texto="Nueva Categoría"
         />
       </div>
 
-      {mostrarFormularioCategoria && (
+      {props.mostrarFormularioCategoria && (
         <FormularioCategoria
-          categoriaAEditar={categoriaEditando}
-          alGuardar={alGuardarCategoria}
-          alCancelar={alCancelarCategoria}
+          categoriaAEditar={props.categoriaEditando}
+          alGuardar={props.alGuardarCategoria}
+          alCancelar={props.alCancelarCategoria}
         />
       )}
 
       <TablaCategorias
         categorias={categorias}
-        alEditarCategoria={alEditarCategoria}
+        alEditarCategoria={props.alEditarCategoria}
       />
     </div>
   );
-};
+}
 
 export default PanelCategorias;

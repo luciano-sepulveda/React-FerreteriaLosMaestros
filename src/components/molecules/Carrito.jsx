@@ -4,22 +4,16 @@ import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
-const Carrito = ({
-  elemento,
-  alModificarCantidad,
-  alEliminar
-}) => {
-  const { producto, cantidad, subtotal } = elemento;
-
+function Carrito(props) {
   const manejarCambioCantidad = (nuevaCantidad) => {
-    if (alModificarCantidad) {
-      alModificarCantidad(producto.id, nuevaCantidad);
+    if (props.alModificarCantidad) {
+      props.alModificarCantidad(props.elemento.producto.id, nuevaCantidad);
     }
   };
 
   const manejarEliminar = () => {
-    if (alEliminar) {
-      alEliminar(producto.id);
+    if (props.alEliminar) {
+      props.alEliminar(props.elemento.producto.id);
     }
   };
 
@@ -29,23 +23,23 @@ const Carrito = ({
         <Col xs={12} md={5}>
           <div className="d-flex align-items-center gap-2 mb-1">
             <Etiqueta variante="light" claseAdicional="text-secondary border small">
-              {producto.codigo}
+              {props.elemento.producto.codigo}
             </Etiqueta>
-            <span className="text-muted small">{producto.categoria}</span>
+            <span className="text-muted small">{props.elemento.producto.categoria}</span>
           </div>
-          <h6 className="fw-bold mb-1 text-dark text-truncate" title={producto.nombre}>
-            {producto.nombre}
+          <h6 className="fw-bold mb-1 text-dark text-truncate" title={props.elemento.producto.nombre}>
+            {props.elemento.producto.nombre}
           </h6>
           <small className="text-muted d-block">
-            Precio unitario: <span className="fw-semibold text-dark">{formatearPrecio(producto.precioVenta)}</span>
+            Precio unitario: <span className="fw-semibold text-dark">{formatearPrecio(props.elemento.producto.precioVenta)}</span>
           </small>
         </Col>
 
         <Col xs={6} md={3} className="text-md-center">
           <span className="d-block text-muted small mb-1">Cantidad:</span>
           <ControlCantidad
-            cantidad={cantidad}
-            stockMaximo={producto.stock || 999}
+            cantidad={props.elemento.cantidad}
+            stockMaximo={props.elemento.producto.stock || 999}
             alCambiar={manejarCambioCantidad}
           />
         </Col>
@@ -53,7 +47,7 @@ const Carrito = ({
         <Col xs={4} md={2} className="text-end">
           <span className="d-block text-muted small">Subtotal:</span>
           <span className="fw-bold text-danger fs-6">
-            {formatearPrecio(subtotal)}
+            {formatearPrecio(props.elemento.subtotal)}
           </span>
         </Col>
 
@@ -69,6 +63,6 @@ const Carrito = ({
       </Row>
     </div>
   );
-};
+}
 
 export default Carrito;

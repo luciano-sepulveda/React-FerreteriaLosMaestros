@@ -4,15 +4,12 @@ import Etiqueta from '../atoms/Etiqueta';
 import { FilaResumen } from '../molecules/ResumenTotal';
 import { formatearPrecio } from '../../utils/formatearPrecio';
 
-const ComprobanteCompra = ({
-  orden,
-  alVolverAlCatalogo,
-  textoVolver = '← Volver al Catálogo'
-}) => {
-  if (!orden) return null;
+function ComprobanteCompra(props) {
+  if (!props.orden) return null;
 
-  const esCotizacion = Boolean(orden.esCotizacion);
-  const folio = orden.folio || (esCotizacion ? 'COT-000001' : 'ORD-000001');
+  const esCotizacion = Boolean(props.orden.esCotizacion);
+  const folio = props.orden.folio || (esCotizacion ? 'COT-000001' : 'ORD-000001');
+  const textoVolver = props.textoVolver || '← Volver al Catálogo';
 
   const manejarImprimir = () => {
     window.print();
@@ -37,7 +34,7 @@ const ComprobanteCompra = ({
               {esCotizacion ? 'Documento de Cotización' : '✓ Compra Aprobada'}
             </Etiqueta>
             <div className="fw-bold text-white mt-1">Folio: #{folio}</div>
-            <small className="text-light opacity-75 d-block">{orden.fecha}</small>
+            <small className="text-light opacity-75 d-block">{props.orden.fecha}</small>
           </div>
         </div>
       </Card.Header>
@@ -50,7 +47,7 @@ const ComprobanteCompra = ({
           <p className="mb-0 small">
             {esCotizacion
               ? 'Esta cotización tiene una validez de 15 días corridos y reserva de stock sujeta a confirmación.'
-              : `Hemos enviado el detalle y boleta electrónica a ${orden.correo || 'tu correo registrado'}.`}
+              : `Hemos enviado el detalle y boleta electrónica a ${props.orden.correo || 'tu correo registrado'}.`}
           </p>
         </div>
 
@@ -58,10 +55,10 @@ const ComprobanteCompra = ({
           <Col md={6}>
             <div className="p-3 bg-light rounded-3 h-100 border">
               <h6 className="fw-bold text-dark border-bottom pb-2 mb-2">Datos del Cliente</h6>
-              <p className="small mb-1"><strong>Nombre:</strong> {orden.nombreCompleto || 'Cliente Particular'}</p>
-              <p className="small mb-1"><strong>RUT:</strong> {orden.rut || 'No especificado'}</p>
-              <p className="small mb-1"><strong>Correo:</strong> {orden.correo || 'No especificado'}</p>
-              <p className="small mb-0"><strong>Teléfono:</strong> {orden.telefono || 'No especificado'}</p>
+              <p className="small mb-1"><strong>Nombre:</strong> {props.orden.nombreCompleto || 'Cliente Particular'}</p>
+              <p className="small mb-1"><strong>RUT:</strong> {props.orden.rut || 'No especificado'}</p>
+              <p className="small mb-1"><strong>Correo:</strong> {props.orden.correo || 'No especificado'}</p>
+              <p className="small mb-0"><strong>Teléfono:</strong> {props.orden.telefono || 'No especificado'}</p>
             </div>
           </Col>
 
@@ -70,20 +67,20 @@ const ComprobanteCompra = ({
               <h6 className="fw-bold text-dark border-bottom pb-2 mb-2">Modalidad de Entrega y Pago</h6>
               <p className="small mb-1">
                 <strong>Entrega:</strong>{' '}
-                {orden.tipoEntrega === 'despacho'
-                  ? `🚚 Despacho a obra: ${orden.direccionEntrega || ''}, ${orden.comuna || 'La Serena'}`
+                {props.orden.tipoEntrega === 'despacho'
+                  ? `🚚 Despacho a obra: ${props.orden.direccionEntrega || ''}, ${props.orden.comuna || 'La Serena'}`
                   : '🏪 Retiro en sucursal La Serena (Balmaceda 1420)'}
               </p>
               <p className="small mb-1">
                 <strong>Medio de pago:</strong>{' '}
-                {orden.medioPago === 'webpay'
+                {props.orden.medioPago === 'webpay'
                   ? 'Webpay / Débito y Crédito'
-                  : orden.medioPago === 'cuentacorriente'
+                  : props.orden.medioPago === 'cuentacorriente'
                   ? 'Cuenta Corriente Contratista (30 días)'
                   : 'Transferencia Bancaria Electrónica'}
               </p>
               <p className="small mb-0">
-                <strong>Tipo Documento:</strong> {orden.tipoCliente === 'contratista' ? 'Factura Electrónica' : 'Boleta Electrónica'}
+                <strong>Tipo Documento:</strong> {props.orden.tipoCliente === 'contratista' ? 'Factura Electrónica' : 'Boleta Electrónica'}
               </p>
             </div>
           </Col>
@@ -102,7 +99,7 @@ const ComprobanteCompra = ({
               </tr>
             </thead>
             <tbody>
-              {orden.items && orden.items.map((item) => (
+              {props.orden.items && props.orden.items.map((item) => (
                 <tr key={item.producto?.id || item.codigo}>
                   <td>
                     <Etiqueta variante="light" claseAdicional="border">
@@ -127,12 +124,12 @@ const ComprobanteCompra = ({
         <div className="row justify-content-end mb-4">
           <div className="col-md-6 col-lg-5">
             <div className="p-3 bg-light rounded-3 border">
-              <FilaResumen etiqueta="Subtotal Neto" valor={orden.subtotalNeto || 0} />
-              <FilaResumen etiqueta="IVA (19%)" valor={orden.montoIva || 0} />
-              {orden.costoDespacho > 0 && (
-                <FilaResumen etiqueta="Despacho a faena" valor={orden.costoDespacho} />
+              <FilaResumen etiqueta="Subtotal Neto" valor={props.orden.subtotalNeto || 0} />
+              <FilaResumen etiqueta="IVA (19%)" valor={props.orden.montoIva || 0} />
+              {props.orden.costoDespacho > 0 && (
+                <FilaResumen etiqueta="Despacho a faena" valor={props.orden.costoDespacho} />
               )}
-              <FilaResumen etiqueta="Valor Total a Pagar" valor={orden.totalPagar || 0} esTotal={true} />
+              <FilaResumen etiqueta="Valor Total a Pagar" valor={props.orden.totalPagar || 0} esTotal={true} />
             </div>
           </div>
         </div>
@@ -151,7 +148,7 @@ const ComprobanteCompra = ({
             <Boton
               texto={textoVolver}
               variante="warning"
-              alHacerClic={alVolverAlCatalogo}
+              alHacerClic={props.alVolverAlCatalogo}
               claseAdicional="px-4"
             />
           </div>
@@ -159,6 +156,6 @@ const ComprobanteCompra = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default ComprobanteCompra;

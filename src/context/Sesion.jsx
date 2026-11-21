@@ -3,7 +3,7 @@ import { SesionContext } from './SesionContexto';
 
 const CLAVE_USUARIO_ACTIVO = 'usuario_activo';
 
-export const SesionProvider = ({ children }) => {
+export function SesionProvider(props) {
   const [usuarioActivo, setUsuarioActivo] = useState(() => {
     try {
       const guardado = localStorage.getItem(CLAVE_USUARIO_ACTIVO);
@@ -39,7 +39,7 @@ export const SesionProvider = ({ children }) => {
         cerrarSesion
       }}
     >
-      {children}
+      {props.children}
     </SesionContext.Provider>
   );
-};
+}

@@ -2,13 +2,9 @@ import Carrito from '../molecules/Carrito';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const ListaCarrito = ({
-  elementos = [],
-  alModificarCantidad,
-  alEliminar,
-  alVaciar,
-  alIrAlCatalogo
-}) => {
+function ListaCarrito(props) {
+  const elementos = props.elementos || [];
+
   if (elementos.length === 0) {
     return (
       <div className="bg-white p-5 rounded-4 shadow-sm text-center border">
@@ -21,7 +17,7 @@ const ListaCarrito = ({
           <Boton
             texto="Explorar Catálogo"
             variante="warning"
-            alHacerClic={alIrAlCatalogo}
+            alHacerClic={props.alIrAlCatalogo}
           />
         </div>
       </div>
@@ -38,13 +34,13 @@ const ListaCarrito = ({
           </Etiqueta>
         </div>
 
-        {alVaciar && (
+        {props.alVaciar && (
           <div className="w-auto">
             <Boton
               texto="Vaciar carrito"
               variante="outline-danger"
               tamano="sm"
-              alHacerClic={alVaciar}
+              alHacerClic={props.alVaciar}
               claseAdicional="px-3"
             />
           </div>
@@ -56,13 +52,13 @@ const ListaCarrito = ({
           <Carrito
             key={item.producto.id}
             elemento={item}
-            alModificarCantidad={alModificarCantidad}
-            alEliminar={alEliminar}
+            alModificarCantidad={props.alModificarCantidad}
+            alEliminar={props.alEliminar}
           />
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default ListaCarrito;

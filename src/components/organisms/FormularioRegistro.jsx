@@ -9,7 +9,7 @@ import {
   validarRut
 } from '../../utils/validaciones';
 
-const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
+function FormularioRegistro(props) {
   const [datos, setDatos] = useState({
     nombreCompleto: '',
     rut: '',
@@ -80,8 +80,8 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
         fechaRegistro: new Date().toLocaleDateString('es-CL')
       };
 
-      if (alRegistrarExitoso) {
-        alRegistrarExitoso(datosParaRegistrar);
+      if (props.alRegistrarExitoso) {
+        props.alRegistrarExitoso(datosParaRegistrar);
       }
     }, 400);
   };
@@ -182,7 +182,7 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
         />
       </div>
 
-      {alIrALogin && (
+      {props.alIrALogin && (
         <div className="text-center mt-3 border-top pt-3">
           <small className="text-muted">
             ¿Ya tienes cuenta?{' '}
@@ -191,7 +191,7 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
               variante="link"
               tamano="sm"
               claseAdicional="p-0 fw-bold text-dark text-decoration-none d-inline w-auto"
-              alHacerClic={alIrALogin}
+              alHacerClic={props.alIrALogin}
               texto="Iniciar Sesión aquí"
             />
           </small>
@@ -199,6 +199,6 @@ const FormularioRegistro = ({ alRegistrarExitoso, alIrALogin }) => {
       )}
     </Form>
   );
-};
+}
 
 export default FormularioRegistro;

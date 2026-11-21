@@ -2,7 +2,7 @@ import { Card } from 'react-bootstrap';
 import Boton from '../atoms/Boton';
 import Etiqueta from '../atoms/Etiqueta';
 
-const ErrorSolicitud = ({ mensaje, alReintentar, alVolverAlCatalogo }) => {
+function ErrorSolicitud(props) {
   return (
     <Card className="border-0 shadow-lg rounded-4 overflow-hidden my-3">
       <Card.Header className="bg-dark text-white p-4 border-bottom border-danger border-3">
@@ -30,7 +30,7 @@ const ErrorSolicitud = ({ mensaje, alReintentar, alVolverAlCatalogo }) => {
           <div className="fs-1 mb-2">❌</div>
           <h5 className="fw-bold mb-2">No pudimos procesar tu solicitud</h5>
           <p className="mb-0 small text-dark">
-            {mensaje || 'Ocurrió un error inesperado al intentar registrar tu pedido. Por favor, reintenta.'}
+            {props.mensaje || 'Ocurrió un error inesperado al intentar registrar tu pedido. Por favor, reintenta.'}
           </p>
         </div>
 
@@ -39,7 +39,7 @@ const ErrorSolicitud = ({ mensaje, alReintentar, alVolverAlCatalogo }) => {
             <Boton
               texto="← Volver al Catálogo"
               variante="outline-dark"
-              alHacerClic={alVolverAlCatalogo}
+              alHacerClic={props.alVolverAlCatalogo}
               claseAdicional="px-3"
             />
           </div>
@@ -48,7 +48,7 @@ const ErrorSolicitud = ({ mensaje, alReintentar, alVolverAlCatalogo }) => {
             <Boton
               texto="🔄 Reintentar"
               variante="warning"
-              alHacerClic={alReintentar}
+              alHacerClic={props.alReintentar}
               claseAdicional="px-4"
             />
           </div>
@@ -56,6 +56,6 @@ const ErrorSolicitud = ({ mensaje, alReintentar, alVolverAlCatalogo }) => {
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default ErrorSolicitud;

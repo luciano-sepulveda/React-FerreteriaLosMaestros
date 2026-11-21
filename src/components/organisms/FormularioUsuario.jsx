@@ -4,18 +4,14 @@ import CampoFormulario from '../molecules/CampoFormulario';
 import Boton from '../atoms/Boton';
 import { validarRequerido, validarCorreo, validarRut } from '../../utils/validaciones';
 
-const FormularioUsuario = ({
-  usuarioAEditar = null,
-  alGuardar,
-  alCancelar
-}) => {
+function FormularioUsuario(props) {
   const [datos, setDatos] = useState({
-    nombreCompleto: usuarioAEditar?.nombreCompleto || '',
-    rut: usuarioAEditar?.rut || '',
-    correo: usuarioAEditar?.correo || '',
-    telefono: usuarioAEditar?.telefono || '',
-    rol: usuarioAEditar?.rol || 'Particular',
-    razonSocial: usuarioAEditar?.razonSocial || ''
+    nombreCompleto: props.usuarioAEditar?.nombreCompleto || '',
+    rut: props.usuarioAEditar?.rut || '',
+    correo: props.usuarioAEditar?.correo || '',
+    telefono: props.usuarioAEditar?.telefono || '',
+    rol: props.usuarioAEditar?.rol || 'Particular',
+    razonSocial: props.usuarioAEditar?.razonSocial || ''
   });
 
   const [errores, setErrores] = useState({});
@@ -53,14 +49,16 @@ const FormularioUsuario = ({
   const manejarEnvio = (e) => {
     e.preventDefault();
     if (!validar()) return;
-    alGuardar(datos);
+    if (props.alGuardar) {
+      props.alGuardar(datos);
+    }
   };
 
   return (
     <Card className="border-0 shadow-sm rounded-4 mb-4">
       <Card.Header className="bg-dark text-white py-3">
         <h5 className="fw-bold mb-0 text-warning">
-          {usuarioAEditar ? 'Editar Usuario' : 'Nuevo Usuario'}
+          {props.usuarioAEditar ? 'Editar Usuario' : 'Nuevo Usuario'}
         </h5>
       </Card.Header>
       <Card.Body className="p-4">
@@ -142,7 +140,7 @@ const FormularioUsuario = ({
               variante="outline-secondary"
               tamano="sm"
               claseAdicional="w-auto px-4"
-              alHacerClic={alCancelar}
+              alHacerClic={props.alCancelar}
               texto="Cancelar"
             />
             <Boton
@@ -157,6 +155,6 @@ const FormularioUsuario = ({
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default FormularioUsuario;

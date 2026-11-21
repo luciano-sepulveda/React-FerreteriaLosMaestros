@@ -1,10 +1,9 @@
 import { Table } from 'react-bootstrap';
 import FilaCategoria from '../molecules/FilaCategoria';
 
-const TablaCategorias = ({
-  categorias = [],
-  alEditarCategoria
-}) => {
+function TablaCategorias(props) {
+  const categorias = props.categorias || [];
+
   return (
     <div className="table-responsive">
       <Table hover className="align-middle small">
@@ -19,13 +18,13 @@ const TablaCategorias = ({
             <FilaCategoria
               key={cat}
               categoria={cat}
-              alEditar={alEditarCategoria}
+              alEditar={props.alEditarCategoria}
             />
           ))}
         </tbody>
       </Table>
     </div>
   );
-};
+}
 
 export default TablaCategorias;
